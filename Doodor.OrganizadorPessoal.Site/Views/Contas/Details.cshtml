@@ -1,0 +1,133 @@
+﻿@model Doodor.OrganizadorPessoal.Application.ViewModels.ContaViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="page-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="icon fa fa-home"></i>
+                        <a href="#">Home</a>
+                    </li>
+                    <li><a href="#">Financeiro</a></li>
+                    <li class="active"><span>Contas</span></li>
+                </ol>
+                <!-- Page header -->
+                <div class="page-header">
+                    <h1 class="page-title">Gestão de Contas</h1>
+                </div>
+                <!-- /Page header -->
+                <div class="col-xs-4">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="panel panel-white panel">
+                <div class="panel-heading pb">
+                    <div class="col-md-8">
+                        <div class="panel-title">Detalhes da Conta</div>
+                    </div>
+                    <!-- Widget title -->
+
+                    <div class="col-md-4 text-right" style="padding:12px;">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+                        <a asp-action="Index" class="btn btn-dark">Voltar</a>
+                    </div>
+                </div>
+
+
+                <div class="panel-body pb">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Nome)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Nome)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.ValorTotal)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.ValorTotal)
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.DiaVencimento)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.DiaVencimento)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.QtdParcelas)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.QtdParcelas)
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="table-responsive">
+                        <table class="table table-hover no-mb">
+                            <thead>
+                                <tr>
+                                    <th>Numero</th>
+                                    <th>Data Parcela</th>
+                                    <th>Valor</th>
+                                    <th>Pago</th>
+                                    <th>Data Pagamento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var parcela in Model.Parcelas)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => parcela.Numero)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => parcela.DataParcela)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => parcela.Valor)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => parcela.Pago)
+                                        </td>
+                                        @if (parcela.Pago)
+                                        {
+                                            <td>
+                                                @Html.DisplayFor(modelItem => parcela.DataPgto)
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>-</td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

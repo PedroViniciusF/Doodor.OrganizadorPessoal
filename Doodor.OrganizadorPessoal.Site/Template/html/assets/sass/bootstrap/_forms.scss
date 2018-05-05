@@ -1,0 +1,46 @@
+/* ------------------------------------------------------------------------------------------------------------------ *
+ *
+ * [Form Components]
+ *
+ *   + .form-control
+ *   + .vertical-resize
+ *
+ * ------------------------------------------------------------------------------------------------------------------ */
+
+.form-control {
+
+  font-size: inherit;
+  font-weight: inherit;
+
+  background-color: transparent;
+  border: solid 1px $color-border-input;
+
+  @include border-radius(0);
+  @include transition($default-transition);
+
+  &, &:hover, &:focus {
+    @include box-shadow(none);
+  } // &, &:hover, &:focus
+
+  &:not([class*="input-"]) {
+    font-size: inherit;
+  } // &:not([class*="input-"])
+
+  &:hover {
+    border-color: lighten($color-default, $percents-lighten);
+  } // &:focus, &.focus
+
+  &:focus {
+    border-color: darken($color-default, $percents-darken);
+  } // &:focus, &.focus
+
+  &[disabled], &[readonly] {
+    opacity: $muted-opacity;
+    background-color: $color-light;
+  } // &[disabled], &[readonly]
+
+} // .form-control
+
+.vertical-resize {
+  resize: vertical;
+} // .vertical-resize

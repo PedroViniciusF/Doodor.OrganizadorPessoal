@@ -1,0 +1,44 @@
+/* ------------------------------------------------------------------------------------------------------------------ *
+ *
+ * [Badges]
+ *
+ *   + .badge
+ *   + .badge-square
+ *
+ * ------------------------------------------------------------------------------------------------------------------ */
+
+//
+// General
+// =======
+
+.badge {
+
+  padding: 2px 4px;
+
+  font-weight: $font-weight-primary;
+  background-color: $color-secondary;
+
+  @include border-radius(50%);
+  @include box-shadow(1px 2px 4px 4px rgba(0, 0, 0, .04));
+
+} // .badge
+
+.badge-square {
+  @include border-radius($border-radius);
+} // .badge-square
+
+
+
+//
+// Alternate colors
+// ================
+
+@include badge-colored(badge-primary,   $color-primary  );
+@include badge-colored(badge-secondary, $color-secondary);
+@include badge-colored(badge-default,   $color-default  );
+@include badge-colored(badge-success,   $color-success  );
+@include badge-colored(badge-info,      $color-info     );
+@include badge-colored(badge-warning,   $color-warning  );
+@include badge-colored(badge-danger,    $color-danger   );
+@include badge-colored(badge-light,     $color-light    );
+@include badge-colored(badge-dark,      $color-dark     );

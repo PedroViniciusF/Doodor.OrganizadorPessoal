@@ -1,0 +1,192 @@
+/* ------------------------------------------------------------------------------------------------------------------ *
+ *
+ * [Tasks]
+ *
+ *   + .widget-tasks
+ *
+ * ------------------------------------------------------------------------------------------------------------------ */
+
+
+.widget-tasks {
+
+} // .widget-tasks
+
+
+.widget-tasks .wg-task-item {
+
+  position: relative;
+
+  margin-top: -1px;
+
+  border-left: solid 2px $color-default;
+
+  @include transition($default-transition);
+
+
+  .wg-meta {
+
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 27px;
+
+    color: $color-text-muted;
+    font-size: $font-size-small-prc;
+
+  } // .wg-meta
+
+  .wg-controls {
+    margin-top: $line-height-computed * .5;
+  } // .wg-controls
+
+  .wg-task-text {
+
+    position: relative;
+
+    &::before {
+
+      display: block;
+      content: '';
+
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+
+      margin: auto;
+
+      width: 0;
+      height: 1px;
+
+      background: $color-text;
+      @include transition($default-transition);
+
+    } // &::before
+
+  } // .wg-task-text
+
+
+  .wg-task-item-heading {
+
+    padding: 10px 15px;
+    @include transition($default-transition);
+
+    &:hover, &:focus {
+      background: $color-light;
+    } // &:hover, &:focus
+
+    .task-item-controls {
+
+      position: absolute;
+      top: 8px;
+      right: 5px;
+
+      margin: 0;
+      padding: 0;
+
+      list-style: none;
+
+      > li {
+
+        display: inline-block;
+
+        > a {
+
+          display: block;
+          width: 30px;
+          height: 30px;
+
+          line-height: 30px;
+          text-align: center;
+
+          color: $color-text;
+
+          opacity: .0;
+          @include transform(translateX(100%));
+          @include transition($default-transition);
+
+        } // > a
+
+        &:nth-child(1) > a { @include transition-delay(.08s); }
+        &:nth-child(2) > a { @include transition-delay(.12s); }
+        &:nth-child(3) > a { @include transition-delay(.16s); }
+        &:nth-child(4) > a { @include transition-delay(.20s); }
+        &:nth-child(5) > a { @include transition-delay(.24s); }
+
+      } // > li
+
+
+      .wg-task-item-toggle .icon {
+        @include transform(none);
+      } // .wg-task-item-toggle .icon
+
+
+    } // .task-item-controls
+
+    &:hover, &:focus {
+
+
+      .task-item-controls {
+
+        opacity: 1.0;
+
+        > li > a {
+          opacity: 1.0;
+          @include transform(none);
+        } // > li > a
+
+      } // .task-item-controls
+
+    } // &:hover, &:focus
+
+  } // .wg-task-item-heading
+
+  .wg-task-item-body {
+
+    padding: 0 15px;
+
+    .wg-task-item-body-content {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    } // .wg-task-item-body-content
+
+  } // .wg-task-item-bod
+
+
+  &.wg-task-item-completed {
+
+    .wg-task-text::before {
+      width: 100%;
+    } // .wg-task-text::before
+
+  } // &.wg-task-item-completed
+
+  &.open {
+
+    .wg-task-item-heading .task-item-controls {
+
+
+      .wg-task-item-toggle .icon {
+        @include transform(rotate(180deg));
+      } // .wg-task-item-toggle .icon
+
+
+    } // .wg-task-item-heading .task-item-controls
+
+  } // &.open
+
+} // .widget-tasks .wg-task-item
+
+
+//
+// Alternate colors
+// ================
+
+@include widget-task-item-colored(wg-task-item-primary,   $color-primary  );
+@include widget-task-item-colored(wg-task-item-secondary, $color-secondary);
+@include widget-task-item-colored(wg-task-item-default,   $color-default  );
+@include widget-task-item-colored(wg-task-item-success,   $color-success  );
+@include widget-task-item-colored(wg-task-item-info,      $color-info     );
+@include widget-task-item-colored(wg-task-item-warning,   $color-warning  );
+@include widget-task-item-colored(wg-task-item-danger,    $color-danger   );
+@include widget-task-item-colored(wg-task-item-light,     $color-light    );
+@include widget-task-item-colored(wg-task-item-dark,      $color-dark     );

@@ -1,0 +1,294 @@
+/* ------------------------------------------------------------------------------------------------------------------ *
+ *
+ * [Calendar]
+ *
+ *   + .widget-calendar
+ *
+ * ------------------------------------------------------------------------------------------------------------------ */
+
+
+.widget-calendar {
+
+  .widget-body-column {
+    position: relative;
+    padding-top: 50px;
+    padding-bottom: 15px;
+  } // .widget-body-column
+
+  .wg-body-column-footer {
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    padding: 15px 25px 15px;
+
+  } // .wg-body-column-footer
+
+} // .widget-calendar
+
+//
+// Left side
+// =========
+
+.widget-calendar {
+
+  .wg-column-left {
+    padding-left: 25px;
+    padding-right: 25px;
+  } // .wg-today
+
+  .wg-today-number {
+
+    display: inline-block;
+    position: relative;
+
+    margin-top: -20px;
+    margin-bottom: -10px;
+
+    font-size: 54px;
+    line-height: $line-height;
+    font-weight: $font-weight-primary;
+
+  } // .wg-today-number
+
+  .wg-today-week-day {
+    display: inline-block;
+    color: $color-primary;
+  } // .wg-today-week-day
+
+  .wg-today-month {
+    display: inline-block;
+    //color: $color-text-muted;
+  } // .wg-today-month
+
+  .wg-today-year {
+    display: inline-block;
+    font-weight: $font-weight-primary-bold;
+  } // .wg-today-year
+
+} // .widget-calendar
+
+
+//
+// Calendar toolbar
+// ================
+
+.widget-calendar .wg-calendar-toolbar {
+
+  @include clearfix();
+  position: relative;
+
+  margin-bottom: $line-height-computed;
+
+  //background: #ccc;
+
+  .wg-prev, .wg-next {
+
+    position: absolute;
+    top: 0;
+
+    font-size: 18px;
+
+    //background: #ddd;
+
+
+  } // .wg-prev, .wg-next
+
+  .wg-prev {
+    left: 0;
+  } // .wg-prev
+
+  .wg-next {
+    right: 0;
+  } // .wg-next
+
+  .wg-month-year {
+    padding-top: 0;
+    font-size: 24px;
+    text-align: center;
+  } // .wg-month-year
+
+} // .widget-calendar .wg-calendar-toolbar
+
+
+//
+// Main calendar
+// =============
+
+.widget-calendar {
+
+  .wg-calendar-wrapper {
+
+  } // .wg-calendar-wrapper
+
+  .wg-calendar {
+    width: 100%;
+  } // .wg-calendar
+
+  .wg-calendar-body {
+
+  } // .wg-calendar-body
+
+  .wg-calendar-row {
+
+  } // .wg-calendar-row
+
+  .wg-calendar-col {
+
+    text-align: center;
+
+    padding-top: 7px;
+    padding-bottom: 7px;
+
+    width: percentage(1 / 7);
+
+    @include transition(
+      color      $default-transition-duration $default-timing-function,
+      background $default-transition-duration $default-timing-function,
+      box-shadow $default-transition-duration $default-timing-function .05s
+    );
+
+    .wg-calendar-col-day {
+
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+
+      line-height: 30px;
+      font-weight: $font-weight-primary;
+
+      @include border-radius(50%);
+
+    } // .wg-calendar-col-day
+
+  } // .wg-calendar-col
+
+} // .widget-calendar
+
+
+//
+// Calendar table header
+// =====================
+
+.widget-calendar .wg-calendar .wg-calendar-header {
+
+  .wg-calendar-col {
+
+    color: $color-text-muted;
+    text-transform: uppercase;
+    font-size: $font-size-small-prc;
+    font-weight: $font-weight-primary;
+
+  } // .wg-calendar-col
+
+  .wg-calendar-col.wg-calendar-col-holiday {
+    //color: $color-default;
+    color: fade-out($color-warning, .35);
+  } // .wg-calendar-col.wg-calendar-col-holiday
+
+} // .widget-calendar .wg-calendar .wg-calendar-header
+
+
+//
+// Calendar table body
+// ===================
+
+.widget-calendar .wg-calendar .wg-calendar-body {
+
+
+  .wg-calendar-col {
+
+    cursor: pointer;
+
+    &:hover, &:focus {
+
+      color: #fff;
+      background: $color-default;
+
+      //@include box-shadow(0 0 0 4px fade-out($color-default, .75));
+
+    } // &:hover, &:focus
+
+    &:active {
+    } // &:active
+
+  } // .wg-calendar-col
+
+  .wg-calendar-col.wg-calendar-col-today {
+
+    //@include box-shadow(0 0 0 4px fade-out($color-default, .75));
+
+    .wg-calendar-col-day {
+      color: #fff;
+      background: $color-default;
+      @include box-shadow(1px 2px 4px 4px rgba(0, 0, 0, .04));
+    } // .wg-calendar-col-day
+
+  } // .wg-calendar-col.wg-calendar-col-today
+
+  .wg-calendar-col.wg-calendar-col-holiday {
+
+    //color: $color-default;
+    color: fade-out($color-warning, .15);
+
+    &:hover, &:focus {
+      color: #fff;
+    } // &:hover, &:focus
+
+  } // .wg-calendar-col.wg-calendar-col-holiday
+
+} // .widget-calendar .wg-calendar .wg-calendar-body
+
+
+
+//
+// Tasks list
+// ==========
+
+.wg-tasks-list {
+
+  list-style: none;
+  margin: $line-height-computed * 1.5 0 0;
+  padding: 0;
+
+  li {
+
+    padding: 3px 0 10px 15px;
+    position: relative;
+
+    &::before {
+
+      display: block;
+      content: '';
+
+      width: 7px;
+      height: 7px;
+
+      position: absolute;
+      top: 10px;
+      left: 0;
+
+      border: solid 1px $color-default;
+
+      @include border-radius(50%);
+
+    } // &::before
+
+    &.wg-task-default::before { border-color: $color-default; }
+    &.wg-task-primary::before { border-color: $color-primary; }
+    &.wg-task-success::before { border-color: $color-success; }
+    &.wg-task-info::before    { border-color: $color-info;    }
+    &.wg-task-warning::before { border-color: $color-warning; }
+    &.wg-task-danger::before  { border-color: $color-danger;  }
+
+  } // li
+
+  .wg-task-item {
+
+  } // .wg-task-item
+
+} // .wg-tasks-list
+
+

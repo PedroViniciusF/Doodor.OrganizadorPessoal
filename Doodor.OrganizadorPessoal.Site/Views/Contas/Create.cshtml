@@ -1,0 +1,103 @@
+﻿@model Doodor.OrganizadorPessoal.Application.ViewModels.ContaViewModel
+@using Doodor.OrganizadorPessoal.Application.ViewModels
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="page-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="icon fa fa-home"></i>
+                        <a href="#">Home</a>
+                    </li>
+                    <li><a href="#">Financeiro</a></li>
+                    <li class="active"><span>Contas</span></li>
+                </ol>
+                <!-- Page header -->
+                <div class="page-header">
+                    <h1 class="page-title">Gestão de Contas</h1>                    
+                </div>
+                <!-- /Page header -->
+                <div class="col-xs-4">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+            <div class="panel panel-white panel">
+                <div class="panel-heading pb">
+                    <div class="panel-title">Cadastro de contas</div>
+                </div>
+                <div class="panel-body pb">
+                    <form asp-action="Create" class="form-sample">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label asp-for="Nome" class="col-sm-3 col-form-label"></label>
+                                    <div class="col-sm-9">
+                                        <input asp-for="Nome" class="form-control" placeholder="Insira o Nome" />
+                                        <span asp-validation-for="Nome" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label asp-for="ValorTotal" class="col-sm-3 col-form-label"></label>
+                                    <div class="col-sm-9">
+                                        <input asp-for="ValorTotal" class="form-control" placeholder="Valor total" />
+                                    </div>
+                                    <span asp-validation-for="ValorTotal" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label asp-for="DiaVencimento" class="col-sm-3 col-form-label"></label>
+                                    <div class="col-sm-9">
+                                        <input asp-for="DiaVencimento" class="form-control" placeholder="Dia do Vencimento" />
+                                        <span asp-validation-for="DiaVencimento" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label asp-for="QtdParcelas" class="col-sm-3 col-form-label"></label>
+                                    <div class="col-sm-9">
+                                        @{
+                                            var parcelas = (IEnumerable<SelectListItem>)ContaViewModel.GetSelectListParcelas();
+                                        }
+                                        <select asp-for="QtdParcelas" asp-items="@parcelas" class="form-control"></select>
+                                        <span asp-validation-for="QtdParcelas" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-right">
+                            <input type="submit" value="Criar" class="btn btn-success mr-2" />
+                            <a asp-action="Index" class="btn btn-dark">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

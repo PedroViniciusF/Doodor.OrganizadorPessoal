@@ -1,0 +1,29 @@
+/* ------------------------------------------------------------------------------------------------------------------ *
+ * [Project Feed Item Colored Mixin]
+ * ------------------------------------------------------------------------------------------------------------------ */
+
+@mixin widget-project-feed-colored($class, $color) {
+
+  .widget-project-feed .wg-project.#{$class} {
+
+    border-left-color: $color;
+
+    .wg-action span {
+      background-color: $color;
+    } // .wg-action span
+
+    .wg-progress-titled {
+
+      .progress-title .value {
+        color: $color;
+      } // .progress-title .value
+
+      .progress-bar {
+        background-color: $color;
+      } // .progress-bar
+
+    } // .wg-progress-titled
+
+  } // .widget-project-feed .wg-project.#{$class}
+
+} // @mixin badge-colored($class, $color)

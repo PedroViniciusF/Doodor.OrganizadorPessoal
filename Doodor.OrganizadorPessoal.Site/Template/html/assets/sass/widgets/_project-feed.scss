@@ -1,0 +1,182 @@
+/* ------------------------------------------------------------------------------------------------------------------ *
+ *
+ * [Project Feed]
+ *
+ *   + .widget-project-feed
+ *   + .widget-project-feed .wg-project
+ *
+ * ------------------------------------------------------------------------------------------------------------------ */
+
+.widget-project-feed {
+
+  .widget-body {
+    padding-top: 0;
+  } // .widget-body
+
+} // .widget-project-feed
+
+.widget-project-feed .wg-project {
+
+  position: relative;
+
+  margin-top: -1px;
+  padding: 15px 0 15px;
+
+  border-left: solid 2px $color-default;
+  border-bottom: solid 1px $color-border;
+
+  @include transition($default-transition);
+
+  &:last-child {
+    border-bottom: none;
+  } // &:last-child
+
+  .wg-project-heading {
+
+    position: relative;
+
+    cursor: pointer;
+
+    height: 50px;
+    padding: 3px 15px 0 82px; // 82 = 80 + 2px left border
+
+  } // .wg-project-heading
+
+  .wg-project-body {
+
+    padding-left: 82px;
+    padding-right: 15px;
+
+    // This element for smooth collapsing
+    .wg-project-body-content {
+      padding-top: $line-height-computed * .5;
+    } // .wg-project-body-content
+
+  } // .wg-project-body
+
+  .wg-datetime {
+
+    position: absolute;
+    top: 3px;
+    right: 15px;
+
+    font-size: 11px;
+    text-align: right;
+    color: $color-text-muted;
+
+    span {
+      position: relative;
+      display: block;
+      margin-top: 5px;
+    } // span
+
+  } // .wg-datetime
+
+  .wg-user-avatar {
+
+    position: absolute;
+    top: 0;
+    left: 15px;
+
+    width: 50px;
+    height: 50px;
+
+    background: $color-light;
+
+  } // .wg-user-avatar
+
+  .wg-user-name {
+    font-weight: $font-weight-primary-bold;
+  } // .wg-user-name
+
+  .wg-action {
+
+    margin-top: 2px;
+    font-size: 12px;
+    color: $color-text-muted;
+
+    span {
+
+      @extend .label;
+
+      padding-top: .15em;
+      padding-bottom: .15em;
+
+      margin-left: 5px;
+
+      color: #fff;
+      font-size: inherit;
+
+      background-color: $color-default;
+
+    } // span
+
+    @include media_xs() {
+      display: none;
+    } // @include media_xs()
+
+  } // .wg-action
+
+  &:hover {
+    background: $color-light;
+  } // &:hover
+
+} // .widget-project-feed .wg-project
+
+
+//
+// Create form layer
+// =================
+
+.widget-project-feed-create-form-row-files {
+
+  .form-control[readonly] {
+    background-color: transparent;
+  } // .form-control[readonly]
+
+  .btn {
+    border: none !important;
+    @include border-radius(0);
+  } // .btn
+
+} // .widget-project-feed-create-form-row-files
+
+.widget-project-feed-create-form-colors {
+
+  display: block;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: inline-block;
+  } // li
+
+} // .widget-project-feed-create-form-colors
+
+.widget-project-feed-create-form-row-percents {
+
+  .input-group-addon {
+    border: none;
+    background-color: transparent;
+  } // .input-group-addon
+
+  .form-control[readonly] {
+    text-align: right;
+    background-color: transparent;
+  } // .form-control[readonly]
+
+} // .widget-project-feed-create-form-row-percents
+
+//
+// Alternate colors
+// ================
+
+@include widget-project-feed-colored(wg-primary,   $color-primary  );
+@include widget-project-feed-colored(wg-secondary, $color-secondary);
+@include widget-project-feed-colored(wg-default,   $color-default  );
+@include widget-project-feed-colored(wg-success,   $color-success  );
+@include widget-project-feed-colored(wg-info,      $color-info     );
+@include widget-project-feed-colored(wg-warning,   $color-warning  );
+@include widget-project-feed-colored(wg-danger,    $color-danger   );
+@include widget-project-feed-colored(wg-light,     $color-light    );
+@include widget-project-feed-colored(wg-dark,      $color-dark     );

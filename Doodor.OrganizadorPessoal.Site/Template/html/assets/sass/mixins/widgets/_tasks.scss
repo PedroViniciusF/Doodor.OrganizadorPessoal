@@ -1,0 +1,43 @@
+/* ------------------------------------------------------------------------------------------------------------------ *
+ * [Task Item Colored Mixin]
+ * ------------------------------------------------------------------------------------------------------------------ */
+
+@mixin widget-task-item-colored($class, $color) {
+
+  .widget-tasks .wg-task-item.#{$class} {
+
+    border-color: $color;
+
+    .wg-task-control {
+
+      & + label {
+
+        &::before {}
+        &::after  {}
+
+        &:hover {
+          &::before { border-color: $color; }
+          &::after  { border-color: $color; }
+        } // &:hover
+
+      } // & + label
+
+      &:checked + label {
+
+        &::before {
+          border-color: $color;
+          background-color: $color;
+        } // &::before
+
+        &::after {
+          border-color: #fff;
+        } // &::after
+
+      } // &:checked + label
+
+    } // .wg-task-control
+
+
+  } // .widget-tasks .wg-task-item.#{$class}
+
+} // @mixin widget-task-item-colored($class, $color)

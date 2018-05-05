@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20180430192355_inicialmaquina.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="microsoft.entityframeworkcore" Version="2.0.2" />
+    <PackageReference Include="microsoft.entityframeworkcore.design" Version="2.0.2" />
+    <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="2.0.2" />
+    <PackageReference Include="microsoft.entityframeworkcore.tools" Version="2.0.2" />
+    <PackageReference Include="microsoft.extensions.configuration" Version="2.0.1" />
+    <PackageReference Include="microsoft.extensions.configuration.fileextensions" Version="2.0.1" />
+    <PackageReference Include="microsoft.extensions.configuration.json" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Doodor.OrganizadorPessoal.Domain.Financeiro\Doodor.OrganizadorPessoal.Domain.Financeiro.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,78 @@
+/* ------------------------------------------------------------------------------------------------------------------ *
+ *
+ * [Breadcrumbs]
+ *
+ *   + .breadcrumb
+ *
+ * ------------------------------------------------------------------------------------------------------------------ */
+
+.breadcrumb {
+
+  display: block;
+
+  margin: 0;
+  padding: 0;
+
+  font-size: 10px;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+
+  background: transparent;
+  border-bottom: solid 1px lighten($color-border, 2%);
+
+  @include clearfix();
+  @include border-radius(0);
+
+  .icon {
+    opacity: .8;
+    font-size: 12px;
+  } // .icon
+
+  a, span {
+
+    display: inline-block;
+    position: relative;
+
+    padding: 13px 0 3px;
+    margin-bottom: -1px;
+
+  } // a, span
+
+  a {
+
+    color: $color-text-muted;
+
+    &:hover, &:focus {
+      color: $color-link;
+    } // &:hover, &:focus
+
+  } // a
+
+  li {
+    position: relative;
+  } // li
+
+  li.active {
+
+    span {
+      color: $color-link-active;
+      border-bottom: solid 1px $color-link-active;
+    } // span
+
+  } // li
+
+  & > li + li:before {
+
+    position: relative;
+    top: -1px;
+
+    opacity: $muted-opacity;
+
+    font-size: 6px;
+    content: '\f054';
+    color: $color-text-muted;
+    font-family: 'FontAwesome', sans-serif;
+
+  } // & > li + li:before
+
+} // .breadcrumb

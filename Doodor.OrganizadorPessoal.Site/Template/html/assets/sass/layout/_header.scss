@@ -1,0 +1,44 @@
+/* ------------------------------------------------------------------------------------------------------------------ *
+ *
+ * [Header]
+ *
+ *   + .page-heading
+ *   + .page-header
+ *
+ * ------------------------------------------------------------------------------------------------------------------ */
+
+
+.page-heading {
+
+  margin: 0 0 $offset;
+
+  background: #fff;
+  border: solid 0 $color-border;
+  border-bottom-width: 1px;
+
+} // .page-heading
+
+.page-header {
+
+  margin: 0;
+  padding: $line-height-computed 0;
+
+  border: none;
+
+  .page-title {
+    margin: 0;
+    padding: 0;
+    font-size: $font-size-h3;
+    font-family: $font-family-primary;
+    font-weight: $font-weight-primary;
+  } // .page-title
+
+  .page-subtitle {
+    margin: 0;
+    padding: 0;
+    font-size: $font-size;
+    color: $color-text-muted;
+  } // .page-subtitle
+
+} // .page-header
+

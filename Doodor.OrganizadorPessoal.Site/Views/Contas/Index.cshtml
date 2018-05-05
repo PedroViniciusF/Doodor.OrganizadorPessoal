@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Doodor.OrganizadorPessoal.Application.ViewModels.ContaViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="page-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="icon fa fa-home"></i>
+                        <a href="#">Home</a>
+                    </li>
+                    <li><a href="#">Financeiro</a></li>
+                    <li class="active"><span>Contas</span></li>
+                </ol>
+                <!-- Page header -->
+                <div class="page-header">
+                    <h1 class="page-title">Gestão de Contas</h1>
+                    <h2 class="page-subtitle">Bem vindo a suas contas</h2>
+                </div>
+                <!-- /Page header -->
+                <div class="col-xs-4">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="panel panel-white panel">
+                <div class="panel-heading pb">
+                    <div class="col-md-8">
+                        <div class="panel-title">Lista de contas</div>
+                    </div>
+                    <!-- Widget title -->
+
+                    <div class="col-md-4 text-right" style="padding:12px;">
+                        <a asp-action="Create" class="btn btn-success btn-fw">Nova Conta</a>
+                    </div>
+                </div>
+
+
+                <div class="panel-body pb">
+                    <div class="table-responsive">
+                        <table class="table table-hover no-mb">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.Nome)</th>
+                                    <th>@Html.DisplayNameFor(model => model.ValorTotal)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nome)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ValorTotal)
+                                        </td>
+                                        <td class="text-right">
+                                            <div class="btn-group">
+                                                <a asp-action="Details" asp-route-id="@item.Id">
+                                                    <button type="button" class="btn btn-o btn-default"><i class="icon fa fa-align-justify"></i></button>
+                                                </a>
+                                                <a asp-action="Edit" asp-route-id="@item.Id">
+                                                    <button type="button" class="btn btn-o btn-warning"><i class="icon fa fa-edit"></i></button>
+                                                </a>
+                                                <a asp-action="Delete" asp-route-id="@item.Id">
+                                                    <button type="button" class="btn btn-o btn-danger"><i class="icon fa fa-trash-o"></i></button>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

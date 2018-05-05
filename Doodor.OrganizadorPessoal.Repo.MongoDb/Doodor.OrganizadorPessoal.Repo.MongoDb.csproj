@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="mongodb.driver" Version="2.5.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Doodor.OrganizadorPessoal.Domain.Financeiro\Doodor.OrganizadorPessoal.Domain.Financeiro.csproj" />
+    <ProjectReference Include="..\Doodor.OrganizadorPessoal.Domain\Doodor.OrganizadorPessoal.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

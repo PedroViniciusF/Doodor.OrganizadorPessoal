@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Doodor.OrganizadorPessoal.Api\Doodor.OrganizadorPessoal.Api.csproj" />
+    <ProjectReference Include="..\Doodor.OrganizadorPessoal.Application\Doodor.OrganizadorPessoal.Application.csproj" />
+    <ProjectReference Include="..\Doodor.OrganizadorPessoal.CrossCutting.Bus\Doodor.OrganizadorPessoal.CrossCutting.Bus.csproj" />
+    <ProjectReference Include="..\Doodor.OrganizadorPessoal.Domain.Financeiro\Doodor.OrganizadorPessoal.Domain.Financeiro.csproj" />
+    <ProjectReference Include="..\Doodor.OrganizadorPessoal.Domain.Pessoal\Doodor.OrganizadorPessoal.Domain.Pessoal.csproj" />
+    <ProjectReference Include="..\Doodor.OrganizadorPessoal.Domain\Doodor.OrganizadorPessoal.Domain.csproj" />
+    <ProjectReference Include="..\Doodor.OrganizadorPessoal.Repo.MongoDb\Doodor.OrganizadorPessoal.Repo.MongoDb.csproj" />
+    <ProjectReference Include="..\Doodor.OrganizadorPessoal.Repo.SqlServer\Doodor.OrganizadorPessoal.Repo.SqlServer.csproj" />
+    <ProjectReference Include="..\Doodor.OrganizadorPessoal.Services\Doodor.OrganizadorPessoal.Services.csproj" />
+  </ItemGroup>
+
+</Project>

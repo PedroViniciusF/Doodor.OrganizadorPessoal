@@ -1,0 +1,185 @@
+/* ------------------------------------------------------------------------------------------------------------------ *
+ *
+ * [User List]
+ *
+ *   + .widget-users-list
+ *
+ * ------------------------------------------------------------------------------------------------------------------ */
+
+
+//
+// Widget markup
+// =============
+
+.widget-users-list {
+
+  .wg-search {
+
+    //margin-top: $line-height-computed * .5;
+    margin-bottom: $line-height-computed * .5;
+
+    padding-left: 15px;
+    padding-right: 15px;
+
+  } // .wg-search
+
+} // .widget-users-list
+
+
+//
+// Search form
+// ===========
+
+
+.widget-users-list .wg-input-group {
+
+  position: relative;
+
+  .wg-input-wrapper {
+
+    margin-right: 40px;
+    @include transition($default-transition);
+
+    .wg-input {
+      @include border-radius(15px);
+    } // .wg-input
+
+  } // .wg-input-wrapper
+
+  .wg-btn-search {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 36px;
+    height: 36px;
+
+    padding: 0;
+    @include transition($default-transition);
+
+  } // .wg-btn-search
+
+  &.focus {
+
+    .wg-input-wrapper {
+      margin-right: 0;
+    } // .wg-input-wrapper
+
+    .wg-btn-search {
+      right: 10px;
+    } // .wg-btn-search
+
+  } // &.focus
+
+} // .widget-users-list .wg-input-group
+
+
+//
+// Users list
+// ==========
+
+.widget-users-list .wg-users-list {
+
+  .wg-user {
+
+    position: relative;
+    height: 70px;
+    padding: 13px 15px 10px 82px; // 82 = 80 + 2px left border
+
+    .wg-avatar {
+
+      position: absolute;
+      top: 10px;
+      left: 15px;
+
+      .avatar {
+        width: 50px;
+        height: 50px;
+        background: $color-light;
+      } // .avatar
+
+      .wg-state {
+
+        position: absolute;
+        right: 2px;
+        bottom: 2px;
+
+      } // .wg-state
+
+    } // .wg-avatar
+
+    .wg-name {
+      font-weight: $font-weight-primary;
+    } // .wg-name
+
+    .wg-post {
+      color: $color-text-muted;
+    } // .wg-post
+
+    .wg-actions {
+
+      position: absolute;
+      top: 8px;
+      right: 5px;
+
+      margin: 0;
+      padding: 0;
+
+      list-style: none;
+
+      > li {
+
+        display: inline-block;
+
+        opacity: .0;
+        @include transform(translateX(100%));
+        @include transition($default-transition);
+
+        &:nth-child(1) { @include transition-delay(.08s); }
+        &:nth-child(2) { @include transition-delay(.12s); }
+        &:nth-child(3) { @include transition-delay(.16s); }
+        &:nth-child(4) { @include transition-delay(.20s); }
+        &:nth-child(5) { @include transition-delay(.24s); }
+
+         .wg-action {
+
+          display: block;
+          width: 30px;
+          height: 30px;
+
+          line-height: 30px;
+          text-align: center;
+
+          color: $color-text;
+
+        } //  .wg-action
+
+      } // > li
+
+
+      .wg-task-item-toggle .icon {
+        @include transform(none);
+      } // .wg-task-item-toggle .icon
+
+
+    } // .task-item-controls
+
+    &:hover, &:focus {
+
+      .wg-actions {
+
+        opacity: 1.0;
+
+        > li {
+          opacity: 1.0;
+          @include transform(none);
+        } // > li
+
+      } // .task-item-controls
+
+    } // &:hover, &:focus
+
+  } // .wg-user
+
+} // .widget-users-list .wg-users-list

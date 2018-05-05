@@ -1,0 +1,180 @@
+/* ------------------------------------------------------------------------------------------------------------------ *
+ *
+ * [Buttons]
+ *
+ *   + .btn
+ *   + .btn-icon
+ *   + .btn .icon
+ *   + .btn-tc-link
+ *
+ * ------------------------------------------------------------------------------------------------------------------ */
+
+//
+// General
+// =======
+
+.btn {
+
+  padding: 8px 20px;
+
+  font-weight: 500;
+  text-shadow: none;
+  font-size: $font-size;
+
+  background: transparent;
+  border: solid 1px $color-border;
+
+  @include box-shadow(none);
+  @include border-radius($border-radius);
+  @include transition($default-transition);
+
+  &:hover, &:focus, &:active {
+    text-shadow: none;
+    @include box-shadow(none);
+  } // &, &:hover, &:focus, &:active
+
+  &:disabled, &.disabled {
+    opacity: .65;
+  } // &:disabled, &.disabled
+
+  &.btn-lg {
+    padding: $padding-lg-v $padding-lg-h;
+    font-size: $font-size + 2;
+  } // &.btn-lg
+
+  &.btn-sm {
+    padding: $padding-sm-v $padding-sm-h;
+  } // &.btn-sm
+
+  &.btn-xs {
+    padding: $padding-xs-v $padding-xs-h;
+    font-size: $font-size-small-prc;
+  } // &.btn-xs
+
+  &.btn-t {
+    color: $color-text;
+    border-color: transparent;
+    background-color: transparent;
+  } // &.btn-t
+
+  &.btn-tc {
+    color: $color-text;
+    border-color: transparent;
+    background-color: transparent;
+  } // &.btn-tc
+
+  &.btn-o {
+    color: $color-text;
+    background-color: transparent;
+    border-color: $color-border;
+  } // &.btn-o
+
+  &.btn-circle {
+
+    padding: $padding-md-v;
+    @include border-radius(50%);
+
+    .icon {
+      display: block;
+      width: 18px;
+      height: 18px;
+      font-size: 14px;
+      line-height: 18px;
+    } // .icon
+
+    &.btn-lg {
+      padding: $padding-lg-v;
+    } // &.btn-lg
+
+    &.btn-sm {
+      padding: $padding-sm-v;
+    } // &.btn-sm
+
+    &.btn-xs {
+      padding: $padding-xs-v;
+      font-size: $font-size;
+    } // &.btn-xs
+
+  } // &.btn-circle
+
+  &.btn-square {
+    @include border-radius(0);
+  } // &.btn-square
+
+  &.btn-rounded {
+    @include border-radius(20px);
+  } // &.btn-rounded
+
+  &.btn-icon {
+    padding-left: 0;
+    padding-right: 0;
+  } // &.btn-icon
+
+} // .btn
+
+
+.btn-icon {
+
+  color: $color-text-muted;
+  border-color: transparent;
+
+  &:hover, &:focus {
+    color: $color-text;
+    border-color: transparent;
+  } // &:hover, &:focus
+
+  &:active {
+    color: darken($color-text, $percents-darken * 2);
+    border-color: transparent;
+  } // &:active
+
+} // .btn-icon
+
+
+//
+// Icons in buttons
+// ================
+
+.btn .icon {
+  font-size: $font-size-icon;
+  &.icon-left  { margin-right: 5px; }
+  &.icon-right { margin-left:  5px; }
+} // .btn .icon
+
+
+//
+// Colored link button
+// ===================
+
+.btn-tc-link {
+
+  &:hover, &:focus, &:active {
+    background: transparent;
+    border-color: transparent;
+  } // &:hover, &:focus, &:active
+
+  &:hover, &:focus {
+    color: lighten($color-text, $percents-lighten);
+  } // &:hover, &:focus
+
+  &:active {
+    color: darken($color-text, $percents-darken);
+  } // &:active
+
+} // .btn-tc-link
+
+
+
+//
+// Alternate colors
+// ================
+
+@include btn-colored(btn-primary,         $color-primary        );
+@include btn-colored(btn-secondary,       $color-secondary      );
+@include btn-colored(btn-default,         $color-default        );
+@include btn-colored(btn-success,         $color-success        );
+@include btn-colored(btn-info,            $color-info           );
+@include btn-colored(btn-warning,         $color-warning        );
+@include btn-colored(btn-danger,          $color-danger         );
+@include btn-colored(btn-light,           $color-light          );
+@include btn-colored(btn-dark,            $color-dark           );

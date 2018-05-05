@@ -1,0 +1,187 @@
+/* ------------------------------------------------------------------------------------------------------------------ *
+ * [Button Colored Mixin]
+ * ------------------------------------------------------------------------------------------------------------------ */
+
+@mixin btn-colored($class, $color) {
+
+  $text-color: pf-foreground-color($color, $color-text, #fff);
+
+  $border-color: $color;
+  $background-color: $color;
+
+  .#{$class} {
+
+    color: $text-color;
+    border-color: $border-color;
+    background-color: $background-color;
+
+    &.btn-tc {
+      color: $color;
+    } // &.btn-tc
+
+    &:hover, &.hover {
+
+      color: $text-color;
+      border-color: lighten($border-color, $percents-lighten);
+      background-color: lighten($background-color, $percents-lighten);
+
+      @include box-shadow(0 0 0 4px fade-out($background-color, .7));
+
+    } // &:hover, &.hover
+
+    &:focus, &.focus {
+      color: $text-color;
+      border-color: lighten($border-color, $percents-lighten);
+      background-color: lighten($background-color, $percents-lighten);
+    } // &:focus, &.focus
+
+    &:active, &.active,
+    .open > &.dropdown-toggle {
+
+      color: $text-color;
+      border-color: darken($border-color, $percents-darken);
+      background-color: darken($background-color, $percents-darken);
+
+      &:hover, &.hover,
+      &:focus, &.focus {
+
+        color: $text-color;
+        border-color: darken($border-color, $percents-darken);
+        background-color: darken($background-color, $percents-darken);
+
+      } // &:.hover, &:.focus
+
+    } // &:active, &.active, .open > &.dropdown-toggle
+
+    &:active, &.active,
+    .open > &.dropdown-toggle {
+      background-image: none;
+    } // &:active, &.active, .open > &.dropdown-toggle
+
+    &.disabled, &[disabled],
+    fieldset[disabled] & {
+
+      &:hover, &.hover,
+      &:focus, &.focus {
+        border-color: $border-color;
+        background-color: $background-color;
+      } // &:hover, &.hover, &:focus, &.focus
+
+    } // &.disabled, &[disabled], fieldset[disabled] &
+
+    .badge {
+      color: $background-color;
+      background-color: $text-color;
+    } // .badge
+
+
+    &.btn-tc-link {
+
+      &:hover, &.hover {
+
+        color: lighten($border-color, $percents-lighten * 2);
+        border-color: transparent;
+        background-color: transparent;
+
+        @include box-shadow(none);
+
+      } // &:hover, &.hover
+
+      &:focus, &.focus {
+        color: lighten($border-color, $percents-lighten * 2);
+        border-color: transparent;
+        background-color: transparent;
+      } // &:focus, &.focus
+
+      &:active, &.active,
+      .open > &.dropdown-toggle {
+
+        color: darken($border-color, $percents-darken * 2);
+        border-color: transparent;
+        background-color: transparent !important;
+
+        &:hover, &.hover,
+        &:focus, &.focus {
+
+          color: darken($border-color, $percents-darken * 2);
+          border-color: transparent;
+          background-color: transparent;
+
+        } // &:.hover, &:.focus
+
+      } // &:active, &.active, .open > &.dropdown-toggle
+
+    } // &.btn-tc-link
+
+  } // .#{$class}
+
+} // @mixin btn-colored($class, $color) {
+
+
+@mixin btn-colored2($class, $color) {
+
+  .#{$class} {
+
+    color: #fff;
+    background: $color;
+    border-color: $color;
+
+    &.btn-tc { color: $color; }
+
+    &:hover, &.hover {
+      color: #fff;
+      border-color: lighten($color, $percents-lighten);
+      background-color: lighten($color, $percents-lighten);
+    } // &:hover, &.hover
+
+    &:active, &.active{
+      color: #fff;
+      border-color: lighten($color, $percents-lighten);
+      background-color: lighten($color, $percents-lighten);
+    } // &:hover, &.hover
+
+    &:focus, &.focus {
+      color: #fff;
+      border-color: darken($color, $percents-darken);
+      background-color: darken($color, $percents-darken);
+    } // &:focus, &.focus
+
+    &[disabled], &.disabled {
+      opacity: .7;
+      background: $color;
+      border-color: $color;
+    } // &[disabled], &.disabled
+
+  } // .#{$class}
+
+  .open > .dropdown-toggle.#{$class} {
+    color: #fff;
+    border-color: darken($color, $percents-darken);
+    background-color: darken($color, $percents-darken);
+  } // .open > .dropdown-toggle.#{$class}
+
+  .#{$class}.active,
+  .#{$class}:active,
+  .open > .dropdown-toggle.#{$class} {
+    color: #fff;
+    border-color: darken($color, $percents-darken);
+    background-color: darken($color, $percents-darken);
+  } // .#{$class}.active, .#{$class}:active, .open > .dropdown-toggle.#{$class}
+
+  .#{$class}.active.focus,
+  .#{$class}.active:focus,
+  .#{$class}.active:hover,
+  .#{$class}.focus:active,
+  .#{$class}:active:focus,
+  .#{$class}:active:hover,
+  .open > .dropdown-toggle.#{$class}.focus,
+  .open > .dropdown-toggle.#{$class}:focus,
+  .open > .dropdown-toggle.#{$class}:hover {
+
+    color: #fff;
+    border-color: darken($color, $percents-darken);
+    background-color: darken($color, $percents-darken);
+
+  } // ...
+
+} // @mixin btn-colored($class, $color)

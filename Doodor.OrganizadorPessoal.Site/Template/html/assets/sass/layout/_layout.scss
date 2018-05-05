@@ -1,0 +1,191 @@
+/* ------------------------------------------------------------------------------------------------------------------ *
+ *
+ * [Layout]
+ *
+ *   + .header
+ *   + .header .top-line
+ *   + .header .sidebar
+ *   + .main-container
+ *
+ * ------------------------------------------------------------------------------------------------------------------ */
+
+
+//
+// Dashboard layout styles: collapsed
+// ==================================
+
+.header {
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+
+  z-index: 50;
+
+} // .header
+
+.header .top-line {
+
+  position: relative;
+  z-index: 3;
+
+  width: 100%;
+  height: $navbar-height;
+  padding-left: $sidebar-width-collapsed;
+
+  @include box-shadow(0 2px 2px rgba(0, 0, 0, .05), 0 1px 0 rgba(0, 0, 0, 0.06));
+
+  .brand {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: $sidebar-width-collapsed;
+    height: $navbar-height;
+
+    color: #fff;
+    text-align: center;
+    font-size: $font-size-h3;
+    line-height: $navbar-height;
+    font-weight: $font-weight-primary-thin;
+
+    background-color: $color-bg-sidebar-brand;
+    @include transition(background-color $default-transition-duration $default-timing-function);
+
+    &:hover, &:focus {
+      background-color: lighten($color-bg-sidebar-brand, $percents-lighten);
+    } // &:hover, &:focus
+
+    &:active {
+      background-color: darken($color-bg-sidebar-brand, $percents-darken);
+    } // &:active
+
+  } // .brand
+
+  .navigation-top {
+  } // .navigation-top
+
+} // .header .top-line
+
+
+.header .sidebar {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  padding-top: $navbar-height;
+
+  height: 100vh;
+  width: $sidebar-width-collapsed;
+
+  color: $color-text-inverse;
+  background: $color-bg-sidebar;
+
+} // .header .sidebar
+
+
+.main-container {
+
+  position: relative;
+  z-index: 0;
+
+  width: 100%;
+  max-width: 100%;
+
+  padding-top: $navbar-height;
+  padding-left: $sidebar-width-collapsed;
+
+} // .main-container
+
+
+//
+// Dashboard layout styles: expanded
+// =================================
+
+.sidebar-expanded {
+
+  .header .top-line {
+
+    padding-left: $sidebar-width-expanded;
+
+    .brand {
+      width: $sidebar-width-expanded;
+    } // .brand
+
+  } // .header .top-line
+
+  .header .sidebar {
+    width: $sidebar-width-expanded
+  } // .header .sidebar
+
+  .main-container {
+    padding-left: $sidebar-width-expanded;
+  } // .main-container
+
+} // .sidebar-expanded
+
+
+//
+// Small width screens
+// ===================
+
+@include media_max_width($screen-sm-min) {
+
+  .header .sidebar {
+
+    width: 0;
+    overflow: hidden;
+
+    .sidebar-content {
+      height: 100%;
+      overflow: scroll;
+    } // .sidebar-content
+
+  } // .header .sidebar
+
+  .header .top-line {
+
+    padding-left: 0;
+
+    .brand {
+      display: none;
+    } // .brand
+
+    .menu-button {
+    } // .menu-button
+
+    .navigation-top {
+    } // .navigation-top
+
+  } // .header .top-line
+
+  .main-container {
+    padding-left: 0;
+  } // .main-container
+
+  .sidebar-expanded {
+
+    .header .sidebar {
+      width: 100%;
+    } // .header .sidebar
+
+    .header .top-line {
+
+      padding-left: 0;
+
+      .brand {
+        display: none;
+      } // .brand
+
+    } // .header .top-line
+
+    .main-container {
+      padding-left: 0;
+    } // .main-container
+
+  } // .sidebar-expanded
+
+} // @include media_xs()

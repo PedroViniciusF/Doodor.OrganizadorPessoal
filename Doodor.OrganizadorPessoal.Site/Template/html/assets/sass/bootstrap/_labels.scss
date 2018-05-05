@@ -1,0 +1,40 @@
+/* ------------------------------------------------------------------------------------------------------------------ *
+ *
+ * [Labels]
+ *
+ *   + .label
+ *
+ * ------------------------------------------------------------------------------------------------------------------ */
+
+//
+// General
+// =======
+
+.label {
+
+  padding: .25em .8em;
+
+  font-size: $font-size;
+  font-weight: $font-weight-primary;
+
+  background-color: $color-primary;
+
+  @include box-shadow(none);
+  @include border-radius($border-radius-rounded);
+
+} // .label
+
+
+//
+// Alternate colors
+// ================
+
+@include label-colored(label-primary,   $color-primary  );
+@include label-colored(label-secondary, $color-secondary);
+@include label-colored(label-default,   $color-default  );
+@include label-colored(label-success,   $color-success  );
+@include label-colored(label-info,      $color-info     );
+@include label-colored(label-warning,   $color-warning  );
+@include label-colored(label-danger,    $color-danger   );
+@include label-colored(label-light,     $color-light    );
+@include label-colored(label-dark,      $color-dark     );

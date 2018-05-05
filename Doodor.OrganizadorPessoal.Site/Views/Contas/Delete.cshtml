@@ -1,0 +1,90 @@
+﻿@model Doodor.OrganizadorPessoal.Application.ViewModels.ContaViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="page-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="icon fa fa-home"></i>
+                        <a href="#">Home</a>
+                    </li>
+                    <li><a href="#">Financeiro</a></li>
+                    <li class="active"><span>Contas</span></li>
+                </ol>
+                <!-- Page header -->
+                <div class="page-header">
+                    <h1 class="page-title">Gestão de Contas</h1>
+                </div>
+                <!-- /Page header -->
+                <div class="col-xs-4">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="panel panel-white panel">
+                <div class="panel-heading pb">
+                    <div class="col-md-8">
+                        <div class="panel-title">Confirmar Exclusão?</div>
+                    </div>
+                    <!-- Widget title -->
+
+                    <div class="col-md-4 text-right" style="padding:12px;">
+                        <form asp-action="Delete">
+                            <input type="hidden" asp-for="Id" />
+                            <input type="submit" value="Deletar" class="btn btn-danger" />
+                            <a asp-action="Index" class="btn btn-dark">Cancelar</a>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="panel-body pb">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Nome)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Nome)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.ValorTotal)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.ValorTotal)
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.DiaVencimento)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.DiaVencimento)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.QtdParcelas)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.QtdParcelas)
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
