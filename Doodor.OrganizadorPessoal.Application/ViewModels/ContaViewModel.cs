@@ -13,7 +13,7 @@ namespace Doodor.OrganizadorPessoal.Application.ViewModels
         }
         [Key]
         public Guid Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Nome da Conta é requerido.")]
         [Display(Name = "Nome da Conta")]
         public string Nome { get; set; }
         [Required]

@@ -12,7 +12,8 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.Entities
 
         public Conta()
         {
-            Parcelas = new List<Parcela>();
+            if(Parcelas == null)
+                Parcelas = new List<Parcela>();
         }
 
         //custrutor para criar uma nova conta

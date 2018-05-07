@@ -98,30 +98,37 @@
                             <tbody>
                                 @foreach (var parcela in Model.Parcelas)
                                 {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => parcela.Numero)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => parcela.DataParcela)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => parcela.Valor)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => parcela.Pago)
-                                        </td>
-                                        @if (parcela.Pago)
-                                        {
-                                            <td>
-                                                @Html.DisplayFor(modelItem => parcela.DataPgto)
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <td>-</td>
-                                        }
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => parcela.Numero)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => parcela.DataParcela)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => parcela.Valor)
+                                    </td>
+                                    <td>
+                                    @if (parcela.Pago)
+                                    {
+                                        @Html.DisplayName("Paga")
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayName("Não paga")
+                                    }                                        
+                                    </td>
+                                    @if (parcela.Pago)
+    {
+                                <td>
+                                    @Html.DisplayFor(modelItem => parcela.DataPgto)
+                                </td>
+}
+else
+{
+                                <td>-</td>
+}
+                                </tr>
                                 }
                             </tbody>
                         </table>

@@ -51,9 +51,11 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.CommandHandlers
             if (_contaRepository.NomeContaExiste(command.Nome))
                 command.AddNotification("Nome", "Nome da conta já cadastrado no banco");
 
-            if (command.Invalid)            
+            if (command.Invalid)
+            {
                 NotificarValidacoesErro(command.Notifications);
-
+                return;
+            }                    
 
             //TODO: verificar se o Cliente que está alterando, é o dono da conta
             #endregion

@@ -2,7 +2,7 @@
 @using Doodor.OrganizadorPessoal.Application.ViewModels
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Conta";
 }
 
 <div class="page-heading">
@@ -41,7 +41,7 @@
                 <div class="panel-body pb">
                     <form asp-action="Edit" class="form-sample">
                         <input type="hidden" asp-for="Id" />
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <vc:summary />
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
@@ -77,7 +77,7 @@
                                     <label asp-for="QtdParcelas" class="col-sm-3 col-form-label"></label>
                                     <div class="col-sm-9">
                                         @{
-                        var parcelas = (IEnumerable<SelectListItem>)ContaViewModel.GetSelectListParcelas();
+                                            var parcelas = (IEnumerable<SelectListItem>)ContaViewModel.GetSelectListParcelas();
                                         }
                                         <select asp-for="QtdParcelas" asp-items="@parcelas" class="form-control"></select>
                                         <span asp-validation-for="QtdParcelas" class="text-danger"></span>
@@ -98,4 +98,31 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    @if (ViewBag.RetornoPost != null)
+    {
+        var notificacao = ViewBag.RetornoPost.ToString().Split(",");
+
+        <script>
+
+        toastr.options = {
+            "closeButton": false,
+            "debug": true,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        toastr["@notificacao[0]"]("@notificacao[1]");
+        </script>
+    }
 }

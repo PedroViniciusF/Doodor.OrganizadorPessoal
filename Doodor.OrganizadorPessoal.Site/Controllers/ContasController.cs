@@ -8,24 +8,29 @@ using Microsoft.EntityFrameworkCore;
 using Doodor.OrganizadorPessoal.Application.ViewModels;
 using Doodor.OrganizadorPessoal.Site.Data;
 using Doodor.OrganizadorPessoal.Application.Interfaces;
+using Doodor.OrganizadorPessoal.Domain.Notifications;
 
 namespace Doodor.OrganizadorPessoal.Site.Controllers
 {
-    public class ContasController : Controller
+    public class ContasController : BaseController
     {
         private readonly IContaAppService _contaAppService;
 
-        public ContasController(IContaAppService contaAppService)
+        public ContasController(IContaAppService contaAppService,
+            IDomainNotificationHandler<DomainNotification> notifications) : base (notifications)
         {
             _contaAppService = contaAppService;
         }
-
-        // GET: ContaViewModels
+              
         public IActionResult Index()
         {
             try
             {
                 var result = _contaAppService.ObterTodos();
+
+                if(TempData["RetornoPost"] != null)
+                    ViewBag.RetornoPost = TempData["RetornoPost"].ToString();
+
                 return View(result);
             }
             catch(Exception e)
@@ -65,13 +70,20 @@ namespace Doodor.OrganizadorPessoal.Site.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(ContaViewModel contaViewModel)
         {
-            if (ModelState.IsValid)
-            {                
-                _contaAppService.CriarConta(contaViewModel);
-                
-                return RedirectToAction(nameof(Index));
+            if (!ModelState.IsValid) return View(contaViewModel);
+
+            _contaAppService.CriarConta(contaViewModel);
+
+            if (OperacaoValida())
+            {
+                TempData["RetornoPost"] = "success, Operação realizada com sucesso";
+                return RedirectToAction("Index");
             }
-            return View(contaViewModel);
+            else
+            {
+                ViewBag.RetornoPost = "error, Operação não realizada";
+                return View(contaViewModel);
+            }            
         }
         
         public IActionResult Edit(Guid id)
@@ -103,7 +115,16 @@ namespace Doodor.OrganizadorPessoal.Site.Controllers
                 try
                 {
                     _contaAppService.AtualizarConta(contaViewModel);
-                    return RedirectToAction("Index");
+                    if (OperacaoValida())
+                    {
+                        TempData["RetornoPost"] = "success, Operação realizada com sucesso";
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ViewBag.RetornoPost = "error, Operação não realizada";
+                        return View(contaViewModel);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -141,7 +162,16 @@ namespace Doodor.OrganizadorPessoal.Site.Controllers
         {
             _contaAppService.DeletarConta(id);
 
-            return RedirectToAction(nameof(Index));
+            if (OperacaoValida())
+            {
+                TempData["RetornoPost"] = "success, Operação realizada com sucesso";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.RetornoPost = "error, Operação não realizada";
+                return View(id);
+            }            
         }  
     }
 }

@@ -1,4 +1,5 @@
-﻿using Doodor.OrganizadorPessoal.Domain.Financeiro.Entities;
+﻿using Dapper;
+using Doodor.OrganizadorPessoal.Domain.Financeiro.Entities;
 using Doodor.OrganizadorPessoal.Domain.Financeiro.Repositories;
 using Doodor.OrganizadorPessoal.Domain.Financeiro.ValueObjects;
 using Doodor.OrganizadorPessoal.Repo.SqlServer.Context;
@@ -16,23 +17,42 @@ namespace Doodor.OrganizadorPessoal.Repository.Repositories
         {            
         }
 
+        public override ICollection<Conta> FindAll()
+        {
+            var sql = "SELECT * FROM CONTAS C "+
+                      "WHERE C.EXCLUIDO = 0 " +
+                      "ORDER BY C.DATACADASTRO DESC";
+            return Db.Database.GetDbConnection().Query<Conta>(sql).ToList();
+        }
+
         public override Conta FindById(Guid id)
         {
-            var conta = DbSet
-                .Include(x => x.Parcelas)
-                .AsNoTracking()
-                .FirstOrDefault(x => x.Id == id);
+            var sql = @"SELECT * FROM CONTAS C " +
+                      "INNER JOIN PARCELAS P ON C.Id= P.ContaId " +
+                      "WHERE C.EXCLUIDO = 0 AND C.Id = @uid " +
+                      "ORDER BY P.DATAPARCELA DESC";
 
-            conta.Parcelas = conta.Parcelas.OrderBy(x => x.DataParcela).ToList();
+            Conta conta = new Conta();
+            List<Parcela> parcelas = new List<Parcela>();
+            var contaQuery = Db.Database.GetDbConnection().Query<Conta, Parcela, Conta>(sql, (c, p) =>
+            {
+                conta = c;
+                parcelas.Add(p);              
 
+                return c;
+            }, new { uid = id });
+
+            conta.Parcelas = parcelas;
             return conta;                   
         }
 
         public bool NomeContaExiste(string nome)
         {
-            var conta = base.Find(x => x.Nome == nome);
+            var sql = @"SELECT * FROM CONTAS C WHERE C.NOME = @nome";
 
-            return conta.Count > 0;
+            var conta = Db.Database.GetDbConnection().Query<Conta>(sql, new { nome = nome }).FirstOrDefault();            
+
+            return conta != null;
         }
 
         public void CriarConta(Conta conta)

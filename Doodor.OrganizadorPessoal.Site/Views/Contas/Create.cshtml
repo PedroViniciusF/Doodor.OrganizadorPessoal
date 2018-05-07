@@ -2,7 +2,7 @@
 @using Doodor.OrganizadorPessoal.Application.ViewModels
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Criar Conta";
 }
 
 <div class="page-heading">
@@ -19,7 +19,7 @@
                 </ol>
                 <!-- Page header -->
                 <div class="page-header">
-                    <h1 class="page-title">Gestão de Contas</h1>                    
+                    <h1 class="page-title">Gestão de Contas</h1>
                 </div>
                 <!-- /Page header -->
                 <div class="col-xs-4">
@@ -40,7 +40,9 @@
                 </div>
                 <div class="panel-body pb">
                     <form asp-action="Create" class="form-sample">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <vc:summary />
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
@@ -95,9 +97,35 @@
     </div>
 </div>
 
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+
+    @if (ViewBag.RetornoPost != null)
+    {
+        var notificacao = ViewBag.RetornoPost.ToString().Split(",");
+         
+    <script>
+        
+        toastr.options = {
+            "closeButton": false,
+            "debug": true,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        toastr["@notificacao[0]"]("@notificacao[1]");
+    </script>
+    }
+    }
 
 
