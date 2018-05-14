@@ -8,6 +8,7 @@ Tecnologias:
 - Entity Framework Core 2.0.2
 - AutoMapper 6.2.2
 - Flunt 1.0.2
+- Dapper 1.50.4
 
 Conceitos:
 - CQRS
@@ -20,6 +21,7 @@ Conceitos:
 - UnitOfWork
 - Padrão Repository e Factory
 - DomainNotifications
+- IoC
 
 Banco de dados:
 - SqlServer
