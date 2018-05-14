@@ -6,12 +6,13 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.Commands
 {
     public class CriarContaCommand : Command
     {
-        public CriarContaCommand(Guid aggregateId, string nome, double valorTotal, int qtdParcelas, int diaVencimento)
+        public CriarContaCommand(Guid aggregateId, string nome, double valorTotal, int qtdParcelas, int diaVencimento, Guid usuarioId)
         {
             Nome = nome;
             ValorTotal = valorTotal;            
             QtdParcelas = qtdParcelas;                        
             DiaVencimento = diaVencimento;
+            UsuarioId = usuarioId;
 
             AggregateId = aggregateId;
         }
@@ -19,5 +20,6 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.Commands
         public double ValorTotal { get; private set; }        
         public int QtdParcelas { get; private set; }               
         public int DiaVencimento { get; private set; }
+        public Guid UsuarioId { get; private set; }
     }
 }

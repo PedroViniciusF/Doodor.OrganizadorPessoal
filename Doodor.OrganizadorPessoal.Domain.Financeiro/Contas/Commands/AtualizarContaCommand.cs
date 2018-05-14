@@ -7,13 +7,14 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.Contas.Commands
 {  
     public class AtualizarContaCommand : Command
     {
-        public AtualizarContaCommand(Guid id, string nome, double valorTotal, int qtdParcelas, int diaVencimento)
+        public AtualizarContaCommand(Guid id, string nome, double valorTotal, int qtdParcelas, int diaVencimento, Guid usuarioId)
         {
             Id = id;
             Nome = nome;
             ValorTotal = valorTotal;
             QtdParcelas = qtdParcelas;
             DiaVencimento = diaVencimento;
+
 
             AggregateId = id;
         }
@@ -22,5 +23,6 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.Contas.Commands
         public double ValorTotal { get; private set; }
         public int QtdParcelas { get; private set; }
         public int DiaVencimento { get; private set; }
+        public Guid UsuarioId { get; private set; }
     }
 }

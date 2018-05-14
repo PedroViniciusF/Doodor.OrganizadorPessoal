@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Doodor.OrganizadorPessoal.Application.ViewModels;
+using Doodor.OrganizadorPessoal.Domain.Authentication.Commands;
 using Doodor.OrganizadorPessoal.Domain.Financeiro.Commands;
 using Doodor.OrganizadorPessoal.Domain.Financeiro.Contas.Commands;
 using System;
@@ -12,14 +13,14 @@ namespace Doodor.OrganizadorPessoal.Application.AutoMapper
     {
         public ViewModelToDomainMappingProfile()
         {
-            //CreateMap<ContaViewModel, ParcelasContaViewModel>();
-            //CreateMap<ContaViewModel, PgtoContaViewModel>();
-
             CreateMap<ContaViewModel, CriarContaCommand>()                
-                .ConstructUsing(c => new CriarContaCommand(c.Id, c.Nome, c.ValorTotal, c.QtdParcelas, c.DiaVencimento));
+                .ConstructUsing(c => new CriarContaCommand(c.Id, c.Nome, c.ValorTotal, c.QtdParcelas, c.DiaVencimento, c.UsuarioId));
 
             CreateMap<ContaViewModel, AtualizarContaCommand>()
-               .ConstructUsing(c => new AtualizarContaCommand(c.Id, c.Nome, c.ValorTotal, c.QtdParcelas, c.DiaVencimento));
+               .ConstructUsing(c => new AtualizarContaCommand(c.Id, c.Nome, c.ValorTotal, c.QtdParcelas, c.DiaVencimento, c.UsuarioId));
+
+            CreateMap<UsuarioViewModel, RegistrarUsuarioCommand>()
+            .ConstructUsing(c => new RegistrarUsuarioCommand(c.Id, c.CPF, c.Nome, c.Email));
         }
     }
 }

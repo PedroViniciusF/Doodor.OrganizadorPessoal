@@ -24,6 +24,8 @@ namespace Doodor.OrganizadorPessoal.Application.ViewModels
         public int DiaVencimento { get; set; }
         [Required]
         public int QtdParcelas { get; set; }
+        public Guid UsuarioId { get; set; }
+
         public List<ParcelaViewModel> Parcelas { get; set; }
 
         public static SelectList GetSelectListParcelas()

@@ -7,7 +7,7 @@ namespace Doodor.OrganizadorPessoal.Application.Interfaces
     public interface IContaAppService : IDisposable
     {        
         ContaViewModel ObterPorId(Guid id);
-        IEnumerable<ContaViewModel> ObterTodos();
+        IEnumerable<ContaViewModel> ObterTodos(Guid usuarioId);
         void CriarConta(ContaViewModel contaViewModel);
         void AtualizarConta(ContaViewModel contaViewModel);
         void DeletarConta(Guid contaId);

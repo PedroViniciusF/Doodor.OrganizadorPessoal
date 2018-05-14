@@ -59,6 +59,11 @@ namespace Doodor.OrganizadorPessoal.Repo.SqlServer.Mappings
                 .WithOne(x => x.Conta);
 
             modelBuilder
+                .HasOne(x => x.Usuario)
+                .WithMany(x=>x.Contas)
+                .HasForeignKey(x => x.UsuarioId);
+
+            modelBuilder
                 .ToTable("contas");
         }
     }

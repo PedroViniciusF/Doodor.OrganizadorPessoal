@@ -1,4 +1,5 @@
-﻿using Doodor.OrganizadorPessoal.Domain.Financeiro.Entities;
+﻿using Doodor.OrganizadorPessoal.Domain.Authentication;
+using Doodor.OrganizadorPessoal.Domain.Financeiro.Entities;
 using Doodor.OrganizadorPessoal.Domain.Financeiro.ValueObjects;
 using Doodor.OrganizadorPessoal.Repo.SqlServer.Extensions;
 using Doodor.OrganizadorPessoal.Repo.SqlServer.Mappings;
@@ -12,11 +13,13 @@ namespace Doodor.OrganizadorPessoal.Repo.SqlServer.Context
     {
         public DbSet<Conta> Contas { get; set; }
         public DbSet<Parcela> Parcelas { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.AddConfiguration(new ContaMapping());
             modelBuilder.AddConfiguration(new ParcelaMapping());
+            modelBuilder.AddConfiguration(new UsuarioMapping());
 
             base.OnModelCreating(modelBuilder);
         }

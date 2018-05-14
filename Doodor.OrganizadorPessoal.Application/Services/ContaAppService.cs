@@ -25,9 +25,9 @@ namespace Doodor.OrganizadorPessoal.Application.Services
         }        
 
 
-        public IEnumerable<ContaViewModel> ObterTodos()
+        public IEnumerable<ContaViewModel> ObterTodos(Guid usuarioId)
         {
-            var result = _contaRepository.FindAll();
+            var result = _contaRepository.Find(x=>x.UsuarioId == usuarioId);
             return _mapper.Map<IEnumerable<Conta>,IEnumerable<ContaViewModel>>(result);
         }
 

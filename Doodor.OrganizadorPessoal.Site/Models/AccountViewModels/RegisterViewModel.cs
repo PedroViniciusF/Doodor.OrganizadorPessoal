@@ -1,27 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Doodor.OrganizadorPessoal.Site.Models.AccountViewModels
 {
     public class RegisterViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "{0} é requerido")]
+        [StringLength(50, ErrorMessage = "O {0} deve conter no máximo {2} caracteres, e no mínimo {1}", MinimumLength = 4)]
+        [Display(Name = "Nome")]
+        public string Nome { get; set; }
+
+        [Required(ErrorMessage = "{0} é requerido")]
+        [EmailAddress(ErrorMessage = "Email inválido")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "{0} é requerido")]
+        [StringLength(11, ErrorMessage = "CPF deve conter 11 caracteres")]
+        [Display(Name = "CPF")]
+        public string Cpf { get; set; }
+
+        [Required(ErrorMessage = "{0} é requerida")]
+        [StringLength(100, ErrorMessage = "A {0} deve conter no máximo {2} caracteres, e no mínimo {1}", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Senha")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Cofirmar Senha")]
+        [Compare("Password", ErrorMessage = "A confirmação e a senha devem ser iguais")]
         public string ConfirmPassword { get; set; }
     }
 }

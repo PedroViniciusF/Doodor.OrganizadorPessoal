@@ -10,6 +10,7 @@ namespace Doodor.OrganizadorPessoal.Tests.Tests.Domain.Financeiro.Entities
     public class ContaTests
     {
         #region Properties
+        private readonly Guid _usuarioId;
         private readonly string _nome;
         private readonly double _valorTotal;
         private readonly int _qtdParcelas;
@@ -39,6 +40,7 @@ namespace Doodor.OrganizadorPessoal.Tests.Tests.Domain.Financeiro.Entities
 
         public ContaTests()
         {
+            _usuarioId = new Guid();
             _nome = "Pedro Vinicius Ferreira";
             _valorTotal = 100;
             _qtdParcelas = 2;
@@ -60,7 +62,7 @@ namespace Doodor.OrganizadorPessoal.Tests.Tests.Domain.Financeiro.Entities
         [DataRow("         ")]
         public void RetornaErroCasoNomeInvalido(string nome)
         {
-            var conta = new Conta(nome,_valorTotal, _qtdParcelas, _diaVencimento);
+            var conta = new Conta(nome,_valorTotal, _qtdParcelas, _diaVencimento, _usuarioId);
 
             Assert.IsTrue(conta.Invalid);
         }
@@ -73,7 +75,7 @@ namespace Doodor.OrganizadorPessoal.Tests.Tests.Domain.Financeiro.Entities
         [DataRow("Pingo Gabriel")]//Nome válido
         public void RetornaErroCasoNomeValido(string nome)
         {
-            var conta = new Conta(nome, _valorTotal, _qtdParcelas, _diaVencimento);
+            var conta = new Conta(nome, _valorTotal, _qtdParcelas, _diaVencimento, _usuarioId);
 
             Assert.IsTrue(conta.Valid);
         }
@@ -90,7 +92,7 @@ namespace Doodor.OrganizadorPessoal.Tests.Tests.Domain.Financeiro.Entities
         [DataRow(null)]        
         public void RetornaErroCasoDiaVencimentoInvalido(int diaVencimento)
         {
-            var conta = new Conta(_nome, _valorTotal, _qtdParcelas, diaVencimento);
+            var conta = new Conta(_nome, _valorTotal, _qtdParcelas, diaVencimento, _usuarioId);
 
             Assert.IsTrue(conta.Invalid);
         }
@@ -104,7 +106,7 @@ namespace Doodor.OrganizadorPessoal.Tests.Tests.Domain.Financeiro.Entities
         [DataRow(1)]
         public void RetornaSucessoCasoDiaVencimentoValido(int diaVencimento)
         {
-            var conta = new Conta(_nome, _valorTotal, _qtdParcelas, diaVencimento);
+            var conta = new Conta(_nome, _valorTotal, _qtdParcelas, diaVencimento, _usuarioId);
 
             Assert.IsTrue(conta.Valid);
         }
@@ -119,7 +121,7 @@ namespace Doodor.OrganizadorPessoal.Tests.Tests.Domain.Financeiro.Entities
         [DataRow(-20)]
         public void RetornaErroCasoQtdParcelasInvalidas(int qtdParcela)
         {
-            var conta = new Conta(_nome, _valorTotal, qtdParcela, _diaVencimento);
+            var conta = new Conta(_nome, _valorTotal, qtdParcela, _diaVencimento, _usuarioId);
 
             Assert.IsTrue(conta.Invalid);
         }
@@ -129,7 +131,7 @@ namespace Doodor.OrganizadorPessoal.Tests.Tests.Domain.Financeiro.Entities
         [TestMethod]
         public void RetornaErroCasoParcelamentoInvalido(int qtdParcelas)
         {
-            var conta = new Conta(_nome, _valorTotal, qtdParcelas, _diaVencimento);
+            var conta = new Conta(_nome, _valorTotal, qtdParcelas, _diaVencimento, _usuarioId);
 
             Assert.IsTrue(conta.Invalid);
         }
@@ -139,7 +141,7 @@ namespace Doodor.OrganizadorPessoal.Tests.Tests.Domain.Financeiro.Entities
         [DataTestMethod]
         public void RetornaSucessoCasoParcelamentoValido(int qtdParcelas)
         {
-            var conta = new Conta(_nome, _valorTotal, qtdParcelas, _diaVencimento);
+            var conta = new Conta(_nome, _valorTotal, qtdParcelas, _diaVencimento, _usuarioId);
 
             Assert.IsTrue(conta.Valid);
         }
@@ -160,7 +162,7 @@ namespace Doodor.OrganizadorPessoal.Tests.Tests.Domain.Financeiro.Entities
         [DataRow(100, 0)]
         public void RetornaErroCasoPagamentoContaInvalido(double valorPago, int parcela)
         {
-            var conta = new Conta(_nome, _valorTotal, _qtdParcelas, _diaVencimento);
+            var conta = new Conta(_nome, _valorTotal, _qtdParcelas, _diaVencimento, _usuarioId);
 
             //conta.PagarConta(valorPago, parcela);          
 
@@ -176,7 +178,7 @@ namespace Doodor.OrganizadorPessoal.Tests.Tests.Domain.Financeiro.Entities
         [DataRow(30, 1)]
         public void RetornaErroCasoPagamentoContaValido(double valorPago, int parcela)
         {
-            var conta = new Conta(_nome, _valorTotal, _qtdParcelas, _diaVencimento);
+            var conta = new Conta(_nome, _valorTotal, _qtdParcelas, _diaVencimento, _usuarioId);
 
            // conta.PagarConta(valorPago, parcela);
 

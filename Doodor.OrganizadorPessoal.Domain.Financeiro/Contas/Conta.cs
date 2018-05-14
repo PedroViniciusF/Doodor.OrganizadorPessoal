@@ -1,4 +1,5 @@
-﻿using Doodor.OrganizadorPessoal.Domain.Entities;
+﻿using Doodor.OrganizadorPessoal.Domain.Authentication;
+using Doodor.OrganizadorPessoal.Domain.Entities;
 using Doodor.OrganizadorPessoal.Domain.Financeiro.ValueObjects;
 using Flunt.Validations;
 using System;
@@ -17,7 +18,7 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.Entities
         }
 
         //custrutor para criar uma nova conta
-        public Conta(string nome, double valorTotal, int qtdParcelas, int diaVencimento)
+        public Conta(string nome, double valorTotal, int qtdParcelas, int diaVencimento, Guid usuarioId)
         {
             Parcelas = new List<Parcela>();
             var parcelado = qtdParcelas > 1;
@@ -31,6 +32,7 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.Entities
                 DiaVencimento = diaVencimento;
                 DataProxPgto = CalcularDataProxPgto(DiaVencimento);
                 Parcelado = parcelado;
+                UsuarioId = usuarioId;
 
                 var parcelasVo = new ParcelasConta();
 
@@ -42,8 +44,8 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.Entities
             }
         }      
 
-        private Conta(Guid id, string nome, double valorTotal, int qtdParcelas, int diaVencimento)
-            :this(nome, valorTotal, qtdParcelas, diaVencimento)
+        private Conta(Guid id, string nome, double valorTotal, int qtdParcelas, int diaVencimento, Guid usuarioId)
+            :this(nome, valorTotal, qtdParcelas, diaVencimento, usuarioId)
         {
             Id = id;
 
@@ -83,9 +85,11 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.Entities
         public bool Parcelado { get; private set; }
         public bool Pago { get; private set; }
 
-        public int QtdParcelas { get; set; }
-        public int DiaVencimento { get; set; }
-        
+        public int QtdParcelas { get; private set; }
+        public int DiaVencimento { get; private set; }
+
+        public Guid UsuarioId { get; private set; }
+        public virtual Usuario Usuario { get; private set; }
         public virtual ICollection<Parcela> Parcelas { get; set; }
 
         #region Regras de Negócio 
@@ -144,9 +148,9 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.Entities
         // de instanciar a classe passando mais coisas
         public static class ContaFactory
         {
-            public static Conta NovaContaCompleta(Guid id, string nome, double valorTotal, int qtdParcelas, int diaVencimento)
+            public static Conta NovaContaCompleta(Guid id, string nome, double valorTotal, int qtdParcelas, int diaVencimento, Guid usuarioId)
             { 
-                var conta = new Conta(id, nome, valorTotal, qtdParcelas, diaVencimento);
+                var conta = new Conta(id, nome, valorTotal, qtdParcelas, diaVencimento, usuarioId);
                 
                 return conta;
             }

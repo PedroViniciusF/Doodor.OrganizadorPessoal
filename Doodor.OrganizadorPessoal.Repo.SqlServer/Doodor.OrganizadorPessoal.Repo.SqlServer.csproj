@@ -6,6 +6,11 @@
 
   <ItemGroup>
     <Compile Remove="Migrations\20180430192355_inicialmaquina.cs" />
+    <Compile Remove="Migrations\20180513032320_usuario.cs" />
+    <Compile Remove="Migrations\20180513073015_contausuario.cs" />
+    <Compile Remove="Migrations\20180513073756_contausuario.cs" />
+    <Compile Remove="Migrations\20180513081621_teste.cs" />
+    <Compile Remove="Migrations\20180513151937_teste.cs" />
   </ItemGroup>
 
   <ItemGroup>

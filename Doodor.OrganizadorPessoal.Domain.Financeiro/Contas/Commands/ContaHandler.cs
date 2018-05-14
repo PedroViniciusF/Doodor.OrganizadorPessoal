@@ -71,7 +71,8 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.CommandHandlers
                 command.Nome, 
                 command.ValorTotal, 
                 command.QtdParcelas, 
-                command.DiaVencimento
+                command.DiaVencimento,
+                command.UsuarioId
             );
 
             //Aplicar as validacoes
@@ -128,7 +129,8 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.CommandHandlers
                 command.Nome,
                 command.ValorTotal,
                 command.QtdParcelas,
-                command.DiaVencimento
+                command.DiaVencimento,
+                command.UsuarioId
             );
 
             //Aplicar as validacoes

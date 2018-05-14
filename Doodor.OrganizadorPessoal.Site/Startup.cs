@@ -17,6 +17,7 @@ using Doodor.OrganizadorPessoal.CrossCutting;
 using Microsoft.AspNetCore.Http;
 using Doodor.OrganizadorPessoal.CrossCutting.Bus;
 using AutoMapper;
+using Doodor.OrganizadorPessoal.Domain.Financeiro.Authentication.Interfaces;
 
 namespace Doodor.OrganizadorPessoal.Site
 {
@@ -35,12 +36,16 @@ namespace Doodor.OrganizadorPessoal.Site
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             // Add application services.
-            services.AddTransient<IEmailSender, EmailSender>();                   
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddScoped<IUser, AspNetUser>();
 
             services.AddMvc();
             services.AddAutoMapper();            

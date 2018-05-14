@@ -13,28 +13,41 @@ using Microsoft.Extensions.Options;
 using Doodor.OrganizadorPessoal.Site.Models;
 using Doodor.OrganizadorPessoal.Site.Models.AccountViewModels;
 using Doodor.OrganizadorPessoal.Site.Services;
+using Doodor.OrganizadorPessoal.Domain.Notifications;
+using Doodor.OrganizadorPessoal.Application.Interfaces;
+using Doodor.OrganizadorPessoal.Application.ViewModels;
+using Doodor.OrganizadorPessoal.Domain.Authentication.Repository;
+using Doodor.OrganizadorPessoal.Domain.Financeiro.Authentication.Interfaces;
 
 namespace Doodor.OrganizadorPessoal.Site.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly IUsuarioAppService _usuarioAppService;
+        private readonly IUsuarioRepository _usuarioRepository;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            IDomainNotificationHandler<DomainNotification> notifications,
+            IUsuarioAppService usuarioAppService,
+            IUsuarioRepository usuarioRepository,
+            IUser user) : base(notifications, user)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _usuarioAppService = usuarioAppService;
+            _usuarioRepository = usuarioRepository;
         }
 
         [TempData]
@@ -64,8 +77,9 @@ namespace Doodor.OrganizadorPessoal.Site.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    _logger.LogInformation("User logged in.");                    
+                    
+                    return RedirectToLocal(returnUrl);                
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -73,12 +87,12 @@ namespace Doodor.OrganizadorPessoal.Site.Controllers
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    _logger.LogWarning("Usuário bloqueado");
                     return RedirectToAction(nameof(Lockout));
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "E-mail ou senha incorreto");
                     return View(model);
                 }
             }
@@ -229,6 +243,21 @@ namespace Doodor.OrganizadorPessoal.Site.Controllers
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+
+                    var usuarioSistema = new UsuarioViewModel(Guid.Parse(user.Id))
+                    {
+                        CPF = model.Cpf,                        
+                        Nome = model.Nome,
+                        Email = model.Email
+                    };
+                                        
+                    _usuarioAppService.Registrar(usuarioSistema);
+
+                    if (!OperacaoValida())
+                    {
+                        await _userManager.DeleteAsync(user);
+                        return View(model);
+                    }
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");

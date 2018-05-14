@@ -26,4 +26,8 @@
     <ProjectReference Include="..\Doodor.OrganizadorPessoal.Repo.SqlServer\Doodor.OrganizadorPessoal.Repo.SqlServer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+  </ItemGroup>
+
 </Project>

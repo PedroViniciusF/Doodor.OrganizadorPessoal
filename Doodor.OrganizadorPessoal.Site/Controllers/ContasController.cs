@@ -9,24 +9,34 @@ using Doodor.OrganizadorPessoal.Application.ViewModels;
 using Doodor.OrganizadorPessoal.Site.Data;
 using Doodor.OrganizadorPessoal.Application.Interfaces;
 using Doodor.OrganizadorPessoal.Domain.Notifications;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Doodor.OrganizadorPessoal.Site.Models;
+using Doodor.OrganizadorPessoal.Domain.Financeiro.Authentication.Interfaces;
 
 namespace Doodor.OrganizadorPessoal.Site.Controllers
 {
+    [Authorize]
     public class ContasController : BaseController
     {
         private readonly IContaAppService _contaAppService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public ContasController(IContaAppService contaAppService,
-            IDomainNotificationHandler<DomainNotification> notifications) : base (notifications)
+            IDomainNotificationHandler<DomainNotification> notifications,
+            UserManager<ApplicationUser> userManager,
+            IUser user) : base (notifications, user)
         {
             _contaAppService = contaAppService;
+            _userManager = userManager;
         }
               
         public IActionResult Index()
         {
             try
             {
-                var result = _contaAppService.ObterTodos();
+                var id = _userManager.GetUserId(User);                
+                var result = _contaAppService.ObterTodos(Guid.Parse(id));
 
                 if(TempData["RetornoPost"] != null)
                     ViewBag.RetornoPost = TempData["RetornoPost"].ToString();
@@ -71,6 +81,8 @@ namespace Doodor.OrganizadorPessoal.Site.Controllers
         public IActionResult Create(ContaViewModel contaViewModel)
         {
             if (!ModelState.IsValid) return View(contaViewModel);
+
+            contaViewModel.UsuarioId = UsuarioId;
 
             _contaAppService.CriarConta(contaViewModel);
 
