@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Doodor.OrganizadorPessoal.Domain.Financeiro.Authentication.Interfaces;
 using Doodor.OrganizadorPessoal.Domain.Financeiro.Entities;
 using Doodor.OrganizadorPessoal.Domain.Financeiro.Repositories;
 using Doodor.OrganizadorPessoal.Domain.Financeiro.ValueObjects;
@@ -13,8 +14,10 @@ namespace Doodor.OrganizadorPessoal.Repository.Repositories
 {
     public class ContaRepository : RepositoryBaseSqlServer<Conta>, IContaRepository
     {        
-        public ContaRepository(ContasContext context) : base(context)
-        {            
+        IUser _user { get; set; }
+        public ContaRepository(ContasContext context, IUser user) : base(context)
+        {
+            _user = user;
         }
 
         public override ICollection<Conta> FindAll()
@@ -30,7 +33,7 @@ namespace Doodor.OrganizadorPessoal.Repository.Repositories
             var sql = @"SELECT * FROM CONTAS C " +
                       "INNER JOIN PARCELAS P ON C.Id= P.ContaId " +
                       "WHERE C.EXCLUIDO = 0 AND C.Id = @uid " +
-                      "ORDER BY P.DATAPARCELA DESC";
+                      "ORDER BY P.DATAPARCELA";
 
             Conta conta = new Conta();
             List<Parcela> parcelas = new List<Parcela>();
@@ -47,10 +50,13 @@ namespace Doodor.OrganizadorPessoal.Repository.Repositories
         }
 
         public bool NomeContaExiste(string nome)
-        {
+        {            
             var sql = @"SELECT * FROM CONTAS C WHERE C.NOME = @nome";
 
-            var conta = Db.Database.GetDbConnection().Query<Conta>(sql, new { nome = nome }).FirstOrDefault();            
+            if (_user.GetUserId() != null)
+                sql += " and usuarioid = @usuarioid;";
+
+            var conta = Db.Database.GetDbConnection().Query<Conta>(sql, new { nome = nome, usuarioid = _user.GetUserId() }).FirstOrDefault();            
 
             return conta != null;
         }

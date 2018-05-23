@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace Doodor.OrganizadorPessoal.Repo.SqlServer.Migrations
@@ -51,17 +53,20 @@ namespace Doodor.OrganizadorPessoal.Repo.SqlServer.Migrations
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnName("datacadastro");
 
+                    b.Property<DateTime>("DataPrimeiroPgto")
+                        .HasColumnName("dataprimeiropgto");
+
                     b.Property<DateTime>("DataProxPgto")
                         .HasColumnName("dataproxpgto");
 
                     b.Property<DateTime>("DataUltPgto")
                         .HasColumnName("dataultpgto");
 
-                    b.Property<int>("DiaVencimento")
-                        .HasColumnName("diavencimento");
-
                     b.Property<bool>("Excluido")
                         .HasColumnName("excluido");
+
+                    b.Property<int>("FrequenciaDiaPgto")
+                        .HasColumnName("frequenciadiapgto");
 
                     b.Property<string>("Nome")
                         .HasColumnName("nome")
@@ -72,6 +77,9 @@ namespace Doodor.OrganizadorPessoal.Repo.SqlServer.Migrations
 
                     b.Property<bool>("Parcelado")
                         .HasColumnName("parcelado");
+
+                    b.Property<int>("PorcVariacaoMensal")
+                        .HasColumnName("porcvariacaomensal");
 
                     b.Property<int>("QtdParcelas")
                         .HasColumnName("qtdparcelas");
@@ -130,7 +138,7 @@ namespace Doodor.OrganizadorPessoal.Repo.SqlServer.Migrations
             modelBuilder.Entity("Doodor.OrganizadorPessoal.Domain.Financeiro.Entities.Conta", b =>
                 {
                     b.HasOne("Doodor.OrganizadorPessoal.Domain.Authentication.Usuario", "Usuario")
-                        .WithMany()
+                        .WithMany("Contas")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

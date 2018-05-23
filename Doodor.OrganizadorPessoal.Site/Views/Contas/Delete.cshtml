@@ -3,52 +3,52 @@
 @{
     ViewData["Title"] = "Delete";
 }
-<div class="page-heading">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12">
-                <ol class="breadcrumb">
-                    <li>
-                        <i class="icon fa fa-home"></i>
-                        <a href="#">Home</a>
-                    </li>
-                    <li><a href="#">Financeiro</a></li>
-                    <li class="active"><span>Contas</span></li>
-                </ol>
-                <!-- Page header -->
-                <div class="page-header">
-                    <h1 class="page-title">Gestão de Contas</h1>
-                </div>
-                <!-- /Page header -->
-                <div class="col-xs-4">
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Exclusão de contas</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="#">Home</a>
+            </li>
+            <li>
+                <a>Financeiro</a>
+            </li>
+            <li class="active">
+                <strong>Contas</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
 
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="panel panel-white panel">
-                <div class="panel-heading pb">
-                    <div class="col-md-8">
-                        <div class="panel-title">Confirmar Exclusão?</div>
+            <div class="ibox float-e-margins">                                                            
+                <div class="ibox-title">
+                    <h5>Confirmar Exclusão?</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
                     </div>
-                    <!-- Widget title -->
-
-                    <div class="col-md-4 text-right" style="padding:12px;">
+                    <br />
+                    <div class="text-right">
                         <form asp-action="Delete">
                             <input type="hidden" asp-for="Id" />
                             <input type="submit" value="Deletar" class="btn btn-danger" />
-                            <a asp-action="Index" class="btn btn-dark">Cancelar</a>
+                            <a asp-action="Index" class="btn btn-white">Cancelar</a>
                         </form>
                     </div>
+
                 </div>
 
-
-                <div class="panel-body pb">
+                <div class="ibox-content">
                     <div class="row">
                         <div class="col-md-6">
                             <dl class="dl-horizontal">
@@ -64,15 +64,27 @@
                                 <dd>
                                     @Html.DisplayFor(model => model.ValorTotal)
                                 </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.DataPrimeiroPgto)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.DataPrimeiroPgto)
+                                </dd>
                             </dl>
                         </div>
                         <div class="col-md-6">
                             <dl class="dl-horizontal">
                                 <dt>
-                                    @Html.DisplayNameFor(model => model.DiaVencimento)
+                                    @Html.DisplayNameFor(model => model.FrequenciaDiaPgto)
                                 </dt>
                                 <dd>
-                                    @Html.DisplayFor(model => model.DiaVencimento)
+                                    @Html.DisplayFor(model => model.FrequenciaDiaPgto)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.PorcVariacaoMensal)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.PorcVariacaoMensal)
                                 </dd>
                                 <dt>
                                     @Html.DisplayNameFor(model => model.QtdParcelas)

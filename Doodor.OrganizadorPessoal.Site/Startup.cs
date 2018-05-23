@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Doodor.OrganizadorPessoal.Site.Data;
-using Doodor.OrganizadorPessoal.Site.Models;
-using Doodor.OrganizadorPessoal.Site.Services;
-using Doodor.OrganizadorPessoal.Application.Interfaces;
-using Doodor.OrganizadorPessoal.Application.Services;
 using Doodor.OrganizadorPessoal.CrossCutting;
 using Microsoft.AspNetCore.Http;
 using Doodor.OrganizadorPessoal.CrossCutting.Bus;
 using AutoMapper;
 using Doodor.OrganizadorPessoal.Domain.Financeiro.Authentication.Interfaces;
+using Doodor.OrganizadorPessoal.Infra.CrossCutting.Identity.Models;
+using Doodor.OrganizadorPessoal.Infra.CrossCutting.Identity;
 
 namespace Doodor.OrganizadorPessoal.Site
 {

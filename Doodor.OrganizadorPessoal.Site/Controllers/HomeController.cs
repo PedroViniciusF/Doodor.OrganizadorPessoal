@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using Doodor.OrganizadorPessoal.Infra.CrossCutting.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Doodor.OrganizadorPessoal.Site.Models;
 
 namespace Doodor.OrganizadorPessoal.Site.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()

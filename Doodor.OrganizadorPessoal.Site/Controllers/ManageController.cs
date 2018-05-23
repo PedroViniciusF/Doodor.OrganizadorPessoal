@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Doodor.OrganizadorPessoal.Infra.CrossCutting.Identity;
+using Doodor.OrganizadorPessoal.Infra.CrossCutting.Identity.Models;
+using Doodor.OrganizadorPessoal.Infra.CrossCutting.Identity.Models.ManageViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Doodor.OrganizadorPessoal.Site.Models;
-using Doodor.OrganizadorPessoal.Site.Models.ManageViewModels;
-using Doodor.OrganizadorPessoal.Site.Services;
 
 namespace Doodor.OrganizadorPessoal.Site.Controllers
 {
@@ -121,10 +119,8 @@ namespace Doodor.OrganizadorPessoal.Site.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);            
             var email = user.Email;
-            await _emailSender.SendEmailConfirmationAsync(email, callbackUrl);
 
             StatusMessage = "Verification email sent. Please check your email.";
             return RedirectToAction(nameof(Index));

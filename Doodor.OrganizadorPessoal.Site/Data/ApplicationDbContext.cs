@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Doodor.OrganizadorPessoal.Site.Models;
-using Doodor.OrganizadorPessoal.Application.ViewModels;
+using Doodor.OrganizadorPessoal.Infra.CrossCutting.Identity.Models;
 
 namespace Doodor.OrganizadorPessoal.Site.Data
 {

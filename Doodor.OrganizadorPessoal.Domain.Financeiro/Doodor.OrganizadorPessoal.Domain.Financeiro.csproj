@@ -13,8 +13,4 @@
     <ProjectReference Include="..\Doodor.OrganizadorPessoal.Domain\Doodor.OrganizadorPessoal.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Contas\ValueObjects\Conta\" />
-  </ItemGroup>
-
 </Project>

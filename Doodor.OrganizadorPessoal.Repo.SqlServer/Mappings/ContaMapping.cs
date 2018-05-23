@@ -23,8 +23,14 @@ namespace Doodor.OrganizadorPessoal.Repo.SqlServer.Mappings
                 .Property(x => x.Excluido)
                 .HasColumnName("excluido");
             modelBuilder
-                .Property(x => x.DiaVencimento)
-                .HasColumnName("diavencimento");
+                .Property(x => x.DataPrimeiroPgto)
+                .HasColumnName("dataprimeiropgto");
+            modelBuilder
+                .Property(x => x.FrequenciaDiaPgto)
+                .HasColumnName("frequenciadiapgto");
+            modelBuilder
+                .Property(x => x.PorcVariacaoMensal)
+                .HasColumnName("porcvariacaomensal");
             modelBuilder
                 .Property(x => x.DataProxPgto)
                 .HasColumnName("dataproxpgto");

@@ -8,203 +8,129 @@
     <link rel="shortcut icon" href="favicon.png">
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/jquery-ui-1.12.1/jquery-ui.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/elegant-font/style.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/themify-icons/themify-icons.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/owl-carousel/assets/owl.carousel.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/owl-carousel/assets/owl.theme.default.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/magnific-popup-master/dist/magnific-popup.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/malihu-custom-scrollbar/jquery.mCustomScrollbar.min.css"asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/jqvmap/dist/jqvmap.min.css"asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/theme.css"asp-append-version="true" />       
+        <link href="~/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/font-awesome/css/font-awesome.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/plugins/toastr/toastr.min.css" rel="stylesheet" asp-append-version="true" />       
+        <link href="~/js/plugins/gritter/jquery.gritter.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/animate.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/style.css" rel="stylesheet" asp-append-version="true" />
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/jquery-ui-1.12.1/jquery-ui.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/elegant-font/style.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/themify-icons/themify-icons.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/owl-carousel/assets/owl.carousel.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/owl-carousel/assets/owl.theme.default.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/magnific-popup-master/dist/magnific-popup.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/malihu-custom-scrollbar/jquery.mCustomScrollbar.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/lib/jqvmap/dist/jqvmap.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/theme.css" asp-append-version="true" />
+        <link href="~/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/font-awesome/css/font-awesome.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/plugins/toastr/toastr.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/js/plugins/gritter/jquery.gritter.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/animate.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/style.css" rel="stylesheet" asp-append-version="true" />
     </environment>
 </head>
-<body class="sidebar-expanded">
-    <!-- Preloader -->
-    <div class="preloader loader"></div>
-    <!-- /Preloader -->
-    <!-- Header -->
-    <header class="header">
-
-        <!-- Top line -->
-        <div class="top-line">
-            <!-- Brand -->
-            <a href="#" class="brand">
-                <!-- Big -->
-                <div class="brand-big">
-                    Organizador Pessoal
-                </div>
-                <!-- /Big -->
-                <!-- Small -->
-                <div class="brand-small">
-                    Doodor
-                </div>
-                <!-- /Small -->
-            </a>
-            <!-- /Brand -->
-            <!-- Menu button -->
-            <div class="menu-button">
-                <a href="#" class="sidebar-toggle menu-toggle open">
-                    <div class="menu-icon">
-                        <span></span><span></span><span></span>
-                        <span></span><span></span><span></span>
-                    </div>
-                </a>
-            </div>
-            <!-- /Menu button -->
-            <!-- Navigation -->
-            <div class="navigation-top">
-                <!-- Navigation left -->
-                <ul class="navbar-top">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon icon-left ti-file"></i>
-                            <span class="navbar-top-title">Criar</span> <i class="caret"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Tarefa</a></li>
-                            <li><a href="#">Conta</a></li>                            
-                        </ul>
-                    </li>
-                </ul>
-                <!-- /Navigation left -->
-                <!-- Navigation right -->
-
-                <ul class="navbar-top navbar-top-right">
-                    <!-- Profile -->
-                    <li class="dropdown">
-                        <!-- Profile avatar -->
-                        <a href="#" class="dropdown-toggle nav-profile" data-toggle="dropdown">
-                            <span class="profile-name">Pedro Vinicius</span>
-                            <span class="caret"></span>
-                            <div class="profile-avatar">
-                                <div class="profile-avatar-image">
-                                    <img src="images/avatar-f-05.jpg" alt="">
-                                </div>
-                            </div>
-                        </a>
-                        <!-- /Profile avatar -->
-                        <!-- Profile dropdown menu -->
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="#"><i class="icon icon-inline fa fa-address-card-o"></i> Perfíl</a></li>
-                            <li><a href="#"><i class="icon icon-inline fa fa-tasks"></i> Notificações</a></li>
-                            <li><a href="#"><i class="icon icon-inline fa fa-sign-out"></i> Sair</a></li>
-                        </ul>
-                        <!-- /Profile dropdown menu -->
-                    </li>
-                    <!-- /Profile -->
-                </ul>
-                <!-- /Navigation right -->
-            </div>
-            <!-- /Navigation -->
-
-        </div>
-        <!-- /Top line -->
-        <!-- Sidebar -->
-        <div class="sidebar custom-scrollbar">
-            <div class="sidebar-content">
-                <!-- Sidebar search -->
-                <div class="sidebar-search">
-                    <form method="get" class="sidebar-search-form">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Pesquisar...">
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default">
-                                    <i class="icon fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <!-- /Sidebar search -->
-                <!-- Navigation -->
-                <ul class="sidebar-navigation sb-nav">
-
-                    <li class="sb-dropdown">
-                        <a href="#" class="sb-nav-item sb-dropdown-toggle">                            
-                                <i class="icon fa fa-usd"></i>
-                                <span>Financeiro</span>
-                        </a>
-                            <ul class="collapse">
+<body>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <span>
+                                <img alt="image" class="img-circle" src="~/images/profile_small.jpg" />
+                            </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                                    <span class="block m-t-xs">
+                                        <strong class="font-bold">Pedro Vinicius</strong>
+                                    </span> <span class="text-muted text-xs block">Developer <b class="caret"></b></span>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="#">Profile</a></li>
+                                <li class="divider"></li>
                                 <li>
-                                    <a asp-controller="Contas" asp-action="Index" class="sb-nav-item">
-                                        <i class="icon fa fa-circle-o"></i>
-                                        <span>Contas</span>
-                                    </a>
+                                    <a asp-area="" asp-controller="Account" asp-action="Logout">Log out</a>                                    
                                 </li>
-                               <li>
-                                    <a href="#" class="sb-nav-item">
-                                        <i class="icon fa fa-circle-o"></i>
-                                        <span>Bit Coins</span>
-                                    </a>
-                                </li>
-                    
                             </ul>
+                        </div>
+                        <div class="logo-element">
+                            CP
+                        </div>
+                    </li>
+                    <li class="active">
+                        <a href="#">
+                            <i class="fa fa-usd"></i>
+                            <span class="nav-label">Financeiro</span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li class="active">
+                                <a asp-controller="Contas" asp-action="Index">
+                                    <i class="icon fa fa-circle-o"></i>
+                                    <span>Contas</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
-                <!-- /Navigation -->
+
             </div>
+        </nav>
+    </div>        
+        <!-- /Header -->
+        <!-- Main container -->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>  
+                </div>                
+            </nav>
         </div>
-        <!-- /Sidebar -->
-
-    </header>
-    <!-- /Header -->
-    <!-- Main container -->
-    <main class="main-container">
         @RenderBody()
-    </main>
-    <!-- /Main container --> 
+    </div>
+            
+        
+        <!-- /Main container -->
 
-    <environment include="Development">
-        <script src="~/js/jquery-2.2.0.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-ui-1.12.1/jquery-ui.min.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js" asp-append-version="true"></script>
-        <script src="~/lib/owl-carousel/owl.carousel.min.js" asp-append-version="true"></script>
-        <script src="~/lib/magnific-popup-master/dist/jquery.magnific-popup.min.js" asp-append-version="true"></script>
-        <script src="~/lib/malihu-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jqvmap/dist/jquery.vmap.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jqvmap/dist/maps/jquery.vmap.world.js" asp-append-version="true"></script>
-        <script src="~/js/jquery.validate.min.js" asp-append-version="true"></script>
-        <script src="~/js/Chart.min.js" asp-append-version="true"></script>
-        <script src="~/js/circle-progress.min.js" asp-append-version="true"></script>
-        <script src="~/js/calendar.js" asp-append-version="true"></script>
-        <script src="~/js/general.js" asp-append-version="true"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" asp-append-version="true" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/jquery-2.2.0.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-ui-1.12.1/jquery-ui.min.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap-3.3.7-dist/js/bootstrap.min.js" asp-append-version="true"></script>
-        <script src="~/lib/owl-carousel/owl.carousel.min.js" asp-append-version="true"></script>
-        <script src="~/lib/magnific-popup-master/dist/jquery.magnific-popup.min.js" asp-append-version="true"></script>
-        <script src="~/lib/malihu-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jqvmap/dist/jquery.vmap.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jqvmap/dist/maps/jquery.vmap.world.js" asp-append-version="true"></script>
-        <script src="~/js/jquery.validate.min.js" asp-append-version="true"></script>
-        <script src="~/js/Chart.min.js" asp-append-version="true"></script>
-        <script src="~/js/circle-progress.min.js" asp-append-version="true"></script>
-        <script src="~/js/calendar.js" asp-append-version="true"></script>
-        <script src="~/js/general.js" asp-append-version="true"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" asp-append-version="true" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" asp-append-version="true"></script>
-    </environment>
+        <environment include="Development">
+            <script src="~/js/jquery-3.1.1.min.js" asp-append-version="true"></script>
+            <script src="~/js/bootstrap.min.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/metisMenu/jquery.metisMenu.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/slimscroll/jquery.slimscroll.min.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/flot/jquery.flot.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/flot/jquery.flot.tooltip.min.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/flot/jquery.flot.spline.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/flot/jquery.flot.resize.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/flot/jquery.flot.pie.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/peity/jquery.peity.min.js" asp-append-version="true"></script>
+            <script src="~/js/demo/peity-demo.js" asp-append-version="true"></script>
+            <script src="~/js/inspinia.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/pace/pace.min.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/jquery-ui/jquery-ui.min.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/gritter/jquery.gritter.min.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/sparkline/jquery.sparkline.min.js" asp-append-version="true"></script>
+            <script src="~/js/demo/sparkline-demo.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/chartJs/Chart.min.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/toastr/toastr.min.js" asp-append-version="true"></script>            
+        </environment>
+        <environment exclude="Development">
+            <script src="~/js/jquery-3.1.1.min.js" asp-append-version="true"></script>
+            <script src="~/js/bootstrap.min.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/metisMenu/jquery.metisMenu.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/slimscroll/jquery.slimscroll.min.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/flot/jquery.flot.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/flot/jquery.flot.tooltip.min.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/flot/jquery.flot.spline.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/flot/jquery.flot.resize.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/flot/jquery.flot.pie.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/peity/jquery.peity.min.js" asp-append-version="true"></script>
+            <script src="~/js/demo/peity-demo.js" asp-append-version="true"></script>
+            <script src="~/js/inspinia.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/pace/pace.min.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/jquery-ui/jquery-ui.min.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/gritter/jquery.gritter.min.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/sparkline/jquery.sparkline.min.js" asp-append-version="true"></script>
+            <script src="~/js/demo/sparkline-demo.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/chartJs/Chart.min.js" asp-append-version="true"></script>
+            <script src="~/js/plugins/toastr/toastr.min.js" asp-append-version="true"></script>
+        </environment>
 
-    @RenderSection("Scripts", required: false)
+        @RenderSection("Scripts", required: false)
 </body>
 </html>

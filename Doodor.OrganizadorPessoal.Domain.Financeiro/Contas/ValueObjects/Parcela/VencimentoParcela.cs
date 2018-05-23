@@ -5,10 +5,12 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.ValueObjects
 {
     public class VencimentoParcela
     {
-        public VencimentoParcela(int diaVencimento, int parcela)
+        public VencimentoParcela(DateTime dataPrimeiroPgto, int parcela, int frequenciaDiaPgto, DateTime dataPgtoUltimaParcela)
         {
-            DiaVencimento = diaVencimento;
+            DataPrimeiroPgto = dataPrimeiroPgto;
             Parcela = parcela;
+            FrequenciaDiaPgto = frequenciaDiaPgto;
+            DataPgtoUltimaParcela = dataPgtoUltimaParcela;
             CalcularDataVencimento();
         }
 
@@ -17,24 +19,60 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.ValueObjects
 
         }
 
-        public int DiaVencimento { get; private set; }
-        public int Parcela { get; set; }
+        public DateTime DataPrimeiroPgto { get; private set; }
+        public int Parcela { get; private set; }
+        public int FrequenciaDiaPgto { get; private set; }
         public DateTime DataVencimento { get; private set; }
+        public DateTime DataPgtoUltimaParcela { get; private set; }
 
         private void CalcularDataVencimento()
         {
-            var dataAtual = DateTime.Now;
-            int mesVencimento = dataAtual.Month + Parcela;
-            int anoVencimento = dataAtual.Year;                       
+            if (FrequenciaDiaPgto >= 29)
+                CalcularDataVencimentoMensal();
+            else
+                CalcularDataVencimentoMenorMensal();
+        }
+        private void CalcularDataVencimentoMensal()
+        {
+            int diaVencimento = DataPrimeiroPgto.Day;
+            int mesVencimento = DataPrimeiroPgto.Month + (Parcela - 1);
+            int anoVencimento = DataPrimeiroPgto.Year;
 
             var mesAnoValidos = VerificaMesVencimentoValidoERetornaMesEAnoValido(mesVencimento, anoVencimento);
 
-            mesVencimento = mesAnoValidos[0];
-            anoVencimento = mesAnoValidos[1];
+            var mesVencimentoValido = mesAnoValidos[0];
+            var anoVencimentoValido = mesAnoValidos[1];
 
-            DiaVencimento = VerificaDiaVencimentoValidoERetornaMenorDataValida(DiaVencimento, mesVencimento, anoVencimento);
+            var diaVencimentoValido = VerificaDiaVencimentoValidoERetornaMenorDataValida(diaVencimento, mesVencimentoValido, anoVencimentoValido);
 
-            DataVencimento = new DateTime(anoVencimento, mesVencimento, DiaVencimento);
+            DataVencimento = new DateTime(anoVencimentoValido, mesVencimentoValido, diaVencimentoValido);
+        }
+        private void CalcularDataVencimentoMenorMensal()
+        {           
+            int mesPgtoUltimaParcela = DataPgtoUltimaParcela.Month;
+            int anoPgtOUltimaParcel = DataPgtoUltimaParcela.Year;
+
+            int diaVencimento = DataPgtoUltimaParcela.Day + FrequenciaDiaPgto;
+
+            int mesVencimento = 0;
+
+            if (diaVencimento > DateTime.DaysInMonth(DataPgtoUltimaParcela.Year, DataPgtoUltimaParcela.Month))
+            {
+                mesVencimento = DataPgtoUltimaParcela.Month + 1;
+            }
+            else
+            {
+                mesVencimento = DataPgtoUltimaParcela.Month;
+            }
+            int anoVencimento = DataPgtoUltimaParcela.Year;
+
+            var mesAnoValidos = VerificaMesVencimentoValidoERetornaMesEAnoValido(mesVencimento, anoVencimento);
+
+            var mesVencimentoValido = mesAnoValidos[0];
+            var anoVencimentoValido = mesAnoValidos[1];
+
+            var diaVencimentoValido = VerificaDiaVencimentoValidoERetornaDataSomadaValida(diaVencimento, mesPgtoUltimaParcela, anoPgtOUltimaParcel);
+            DataVencimento = new DateTime(anoVencimentoValido, mesVencimentoValido, diaVencimentoValido);
         }
         private IList<int> VerificaMesVencimentoValidoERetornaMesEAnoValido(int mesVencimento, int anoVencimento)
         {            
@@ -56,6 +94,15 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.ValueObjects
 
             if (diaVencimento > maiorDiaDoMes)
                 return maiorDiaDoMes;
+
+            return diaVencimento;
+        }
+        private int VerificaDiaVencimentoValidoERetornaDataSomadaValida(int diaVencimento, int mesVencimentoUltParcela, int anoVencimentoUltParcela)
+        {
+            var maiorDiaDoMesUltParcela = DateTime.DaysInMonth(anoVencimentoUltParcela, mesVencimentoUltParcela);
+
+            if (diaVencimento > maiorDiaDoMesUltParcela)
+                return diaVencimento - maiorDiaDoMesUltParcela;
 
             return diaVencimento;
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Doodor.OrganizadorPessoal.Domain.Financeiro.Contas.ValueObjects.Conta;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,29 +21,31 @@ namespace Doodor.OrganizadorPessoal.Application.ViewModels
         [Display(Name = "Valor total da conta")]
         public double ValorTotal { get; set; }
         [Required]
-        [Display(Name = "Dia vencimento da conta")]
-        public int DiaVencimento { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime DataPrimeiroPgto { get; set; }
         [Required]
         public int QtdParcelas { get; set; }
+
+        [Required]
+        [Display(Name = "Frequencia pgto")]
+        public int FrequenciaDiaPgto { get; set; }
+        [Required]
+        [Display(Name = "Porcentagem variacao mensal")]
+        public int PorcVariacaoMensal { get; set; }
+
         public Guid UsuarioId { get; set; }
 
         public List<ParcelaViewModel> Parcelas { get; set; }
 
-        public static SelectList GetSelectListParcelas()
+        public static SelectList GetSelectListFrequenciaPgto()
         {
-            var parcelas = new List<ParcelaViewModel>() {
-                new ParcelaViewModel(){ Numero = 1 },
-                new ParcelaViewModel(){ Numero = 2 },
-                new ParcelaViewModel(){ Numero = 3 },
-                new ParcelaViewModel(){ Numero = 4 },
-                new ParcelaViewModel(){ Numero = 5 },
-                new ParcelaViewModel(){ Numero = 6 },
-                new ParcelaViewModel(){ Numero = 7 },
-                new ParcelaViewModel(){ Numero = 8 },
-                new ParcelaViewModel(){ Numero = 9 },
-                new ParcelaViewModel(){ Numero = 10 }
+            var parcelas = new List<object>() {
+                new { FrequenciaDias = (int)FrequenciaPgtoVO.FrequenciaPgto.Semanal , Descricao = "Semanal(" + (int)FrequenciaPgtoVO.FrequenciaPgto.Semanal + ")" },
+                new { FrequenciaDias = (int)FrequenciaPgtoVO.FrequenciaPgto.Quinzenal , Descricao = "Quinzenal(" + (int)FrequenciaPgtoVO.FrequenciaPgto.Quinzenal + ")" },
+                new { FrequenciaDias = (int)FrequenciaPgtoVO.FrequenciaPgto.Mensal , Descricao = "Mensal(" + (int)FrequenciaPgtoVO.FrequenciaPgto.Mensal + ")" }
             };
-            return new SelectList(parcelas, "Numero", "Numero");
+            return new SelectList(parcelas, "FrequenciaDias", "Descricao");
         }
     }
 }

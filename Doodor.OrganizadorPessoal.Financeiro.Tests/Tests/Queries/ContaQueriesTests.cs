@@ -18,7 +18,7 @@ namespace Doodor.OrganizadorPessoal.Financeiro.Tests.Tests.Queries
             _contas = new List<Conta>();
             for (var i = 0; i<=10; i++)
             {                
-                _contas.Add(new Conta($"carro-{i}", 100, 2, 9, Guid.NewGuid()));
+                _contas.Add(new Conta($"carro-{i}", 100, 2, DateTime.Now,30, 0, Guid.NewGuid()));
             }
         }
 

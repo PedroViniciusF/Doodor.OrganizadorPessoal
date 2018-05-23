@@ -6,6 +6,7 @@ using Doodor.OrganizadorPessoal.Domain.Authentication.Commands;
 using Doodor.OrganizadorPessoal.Domain.Authentication.Events;
 using Doodor.OrganizadorPessoal.Domain.Authentication.Repository;
 using Doodor.OrganizadorPessoal.Domain.Bus;
+using Doodor.OrganizadorPessoal.Domain.Financeiro.Authentication.Interfaces;
 using Doodor.OrganizadorPessoal.Domain.Financeiro.CommandHandlers;
 using Doodor.OrganizadorPessoal.Domain.Financeiro.Commands;
 using Doodor.OrganizadorPessoal.Domain.Financeiro.Contas.Commands;
@@ -15,6 +16,8 @@ using Doodor.OrganizadorPessoal.Domain.Financeiro.Services;
 using Doodor.OrganizadorPessoal.Domain.Handlers;
 using Doodor.OrganizadorPessoal.Domain.Notifications;
 using Doodor.OrganizadorPessoal.Domain.Repository;
+using Doodor.OrganizadorPessoal.Infra.CrossCutting.Identity;
+using Doodor.OrganizadorPessoal.Infra.CrossCutting.Identity.Models;
 using Doodor.OrganizadorPessoal.Repo.SqlServer.Context;
 using Doodor.OrganizadorPessoal.Repo.SqlServer.Repository;
 using Doodor.OrganizadorPessoal.Repo.SqlServer.Uow;
@@ -54,12 +57,18 @@ namespace Doodor.OrganizadorPessoal.CrossCutting
             services.AddScoped<IHandler<ContaDeletadaEvent>, ContaEventHandler>();
             services.AddScoped<IHandler<UsuarioRegistradoEvent>, UsuarioEventHandler>();
 
-            //Infra
+            //Infra - Data       
             services.AddScoped<IContaRepository, ContaRepository> ();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ContasContext>();
-            services.AddScoped<IBus, InMemoryBus>();            
+            
+            //Infra - Bus
+            services.AddScoped<IBus, InMemoryBus>();
+
+            //Infra - Identity
+            services.AddTransient<IEmailSender, EmailSender>();            
+            services.AddScoped<IUser, AspNetUser>();
 
             return services;
         }

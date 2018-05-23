@@ -14,10 +14,10 @@ namespace Doodor.OrganizadorPessoal.Application.AutoMapper
         public ViewModelToDomainMappingProfile()
         {
             CreateMap<ContaViewModel, CriarContaCommand>()                
-                .ConstructUsing(c => new CriarContaCommand(c.Id, c.Nome, c.ValorTotal, c.QtdParcelas, c.DiaVencimento, c.UsuarioId));
+                .ConstructUsing(c => new CriarContaCommand(c.Id, c.Nome, c.ValorTotal, c.QtdParcelas, c.DataPrimeiroPgto, c.FrequenciaDiaPgto, c.PorcVariacaoMensal, c.UsuarioId));
 
             CreateMap<ContaViewModel, AtualizarContaCommand>()
-               .ConstructUsing(c => new AtualizarContaCommand(c.Id, c.Nome, c.ValorTotal, c.QtdParcelas, c.DiaVencimento, c.UsuarioId));
+               .ConstructUsing(c => new AtualizarContaCommand(c.Id, c.Nome, c.ValorTotal, c.QtdParcelas, c.DataPrimeiroPgto, c.FrequenciaDiaPgto, c.PorcVariacaoMensal, c.UsuarioId));
 
             CreateMap<UsuarioViewModel, RegistrarUsuarioCommand>()
             .ConstructUsing(c => new RegistrarUsuarioCommand(c.Id, c.CPF, c.Nome, c.Email));

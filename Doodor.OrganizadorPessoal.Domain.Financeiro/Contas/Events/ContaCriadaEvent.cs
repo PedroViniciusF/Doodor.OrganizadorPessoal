@@ -5,7 +5,7 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.Contas.Events
 {
     public class ContaCriadaEvent : Event
     {
-        public ContaCriadaEvent(Guid id, string nome, double valorTotal, bool pago, int qtdParcelas, DateTime dataPgto, bool parcelado, int diaVencimento)
+        public ContaCriadaEvent(Guid id, string nome, double valorTotal, bool pago, int qtdParcelas, DateTime dataPgto, bool parcelado, DateTime diaPrimeiroPgto, int frequenciaDiaPgto, int porcVariacaoMensal)
         {
             Id = id;
             Nome = nome;
@@ -14,7 +14,9 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.Contas.Events
             QtdParcelas = qtdParcelas;
             DataPgto = dataPgto;
             Parcelado = parcelado;
-            DiaVencimento = diaVencimento;
+            DiaPrimeiroPgto = diaPrimeiroPgto;
+            FrequenciaDiaPgto = frequenciaDiaPgto;
+            PorcVariacaoMensal = porcVariacaoMensal;
 
             AggregateId = id;
         }
@@ -25,6 +27,8 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.Contas.Events
         public int QtdParcelas { get; set; }
         public DateTime DataPgto { get; set; }
         public bool Parcelado { get; set; }
-        public int DiaVencimento { get; set; }
+        public DateTime DiaPrimeiroPgto { get; set; }
+        public int FrequenciaDiaPgto { get; set; }
+        public int PorcVariacaoMensal { get; set; }
     }
 }

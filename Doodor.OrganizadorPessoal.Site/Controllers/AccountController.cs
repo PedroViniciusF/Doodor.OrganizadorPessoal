@@ -1,23 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Doodor.OrganizadorPessoal.Site.Models;
-using Doodor.OrganizadorPessoal.Site.Models.AccountViewModels;
-using Doodor.OrganizadorPessoal.Site.Services;
 using Doodor.OrganizadorPessoal.Domain.Notifications;
 using Doodor.OrganizadorPessoal.Application.Interfaces;
 using Doodor.OrganizadorPessoal.Application.ViewModels;
 using Doodor.OrganizadorPessoal.Domain.Authentication.Repository;
 using Doodor.OrganizadorPessoal.Domain.Financeiro.Authentication.Interfaces;
+using Doodor.OrganizadorPessoal.Infra.CrossCutting.Identity.Models;
+using Doodor.OrganizadorPessoal.Infra.CrossCutting.Identity;
 
 namespace Doodor.OrganizadorPessoal.Site.Controllers
 {
@@ -31,6 +26,7 @@ namespace Doodor.OrganizadorPessoal.Site.Controllers
         private readonly ILogger _logger;
         private readonly IUsuarioAppService _usuarioAppService;
         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IUser _user;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -48,6 +44,7 @@ namespace Doodor.OrganizadorPessoal.Site.Controllers
             _logger = logger;
             _usuarioAppService = usuarioAppService;
             _usuarioRepository = usuarioRepository;
+            _user = user;
         }
 
         [TempData]
@@ -240,9 +237,7 @@ namespace Doodor.OrganizadorPessoal.Site.Controllers
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);                    
 
                     var usuarioSistema = new UsuarioViewModel(Guid.Parse(user.Id))
                     {
@@ -269,14 +264,13 @@ namespace Doodor.OrganizadorPessoal.Site.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        
+        [Authorize]        
         public async Task<IActionResult> Logout()
-        {
+        {            
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction("Login");
         }
 
         [HttpPost]
@@ -398,10 +392,9 @@ namespace Doodor.OrganizadorPessoal.Site.Controllers
 
                 // For more information on how to enable account confirmation and password reset please
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
-                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Request.Scheme);
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);               
                 await _emailSender.SendEmailAsync(model.Email, "Reset Password",
-                   $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+                   $"Please reset your password by clicking here: <a href='{""}'>link</a>");
                 return RedirectToAction(nameof(ForgotPasswordConfirmation));
             }
 

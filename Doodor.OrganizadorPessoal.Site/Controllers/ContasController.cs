@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Doodor.OrganizadorPessoal.Application.ViewModels;
-using Doodor.OrganizadorPessoal.Site.Data;
 using Doodor.OrganizadorPessoal.Application.Interfaces;
 using Doodor.OrganizadorPessoal.Domain.Notifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Doodor.OrganizadorPessoal.Site.Models;
 using Doodor.OrganizadorPessoal.Domain.Financeiro.Authentication.Interfaces;
+using Doodor.OrganizadorPessoal.Infra.CrossCutting.Identity.Models;
 
 namespace Doodor.OrganizadorPessoal.Site.Controllers
 {
@@ -126,6 +120,8 @@ namespace Doodor.OrganizadorPessoal.Site.Controllers
             {
                 try
                 {
+                    contaViewModel.UsuarioId = UsuarioId;
+
                     _contaAppService.AtualizarConta(contaViewModel);
                     if (OperacaoValida())
                     {

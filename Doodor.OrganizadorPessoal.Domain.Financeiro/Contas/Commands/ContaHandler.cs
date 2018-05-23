@@ -71,7 +71,9 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.CommandHandlers
                 command.Nome, 
                 command.ValorTotal, 
                 command.QtdParcelas, 
-                command.DiaVencimento,
+                command.DiaPrimeiroPgto,  
+                command.FrequenciaDiaPgto,
+                command.PorcVariacaoMensal,
                 command.UsuarioId
             );
 
@@ -96,7 +98,7 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.CommandHandlers
             if (Commit())
             {
                 //Dispara evento de processo concluido
-                _bus.RaiseEvent(new ContaCriadaEvent(conta.Id, conta.Nome, conta.ValorTotal, conta.Pago, conta.QtdParcelas, conta.DataProxPgto, conta.Parcelado, conta.DiaVencimento));
+                _bus.RaiseEvent(new ContaCriadaEvent(conta.Id, conta.Nome, conta.ValorTotal, conta.Pago, conta.QtdParcelas, conta.DataProxPgto, conta.Parcelado, conta.DataPrimeiroPgto, conta.FrequenciaDiaPgto, conta.PorcVariacaoMensal));
             }
             #endregion                        
         }
@@ -129,7 +131,9 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.CommandHandlers
                 command.Nome,
                 command.ValorTotal,
                 command.QtdParcelas,
-                command.DiaVencimento,
+                command.DiaPrimeiroPgto,
+                command.FrequenciaDiaPgto,
+                command.PorcVariacaoMensal,
                 command.UsuarioId
             );
 
@@ -155,7 +159,7 @@ namespace Doodor.OrganizadorPessoal.Domain.Financeiro.CommandHandlers
             if (Commit())
             {
                 //Dispara evento de processo concluido
-                _bus.RaiseEvent(new ContaAtualizadaEvent(conta.Id, conta.Nome, conta.ValorTotal, conta.Pago, conta.QtdParcelas, conta.DataProxPgto, conta.Parcelado, conta.DiaVencimento));
+                _bus.RaiseEvent(new ContaAtualizadaEvent(conta.Id, conta.Nome, conta.ValorTotal, conta.Pago, conta.QtdParcelas, conta.DataProxPgto, conta.Parcelado, conta.DataPrimeiroPgto, conta.FrequenciaDiaPgto, conta.PorcVariacaoMensal));
             }
             #endregion                        
         }
